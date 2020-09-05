@@ -25,7 +25,7 @@ services:
       DB_PASSWORD: postgres
       DB_NAME: schedule-manager
     depends_on:
-    - database
+      - database
 
   database:
     image: postgres
