@@ -1,0 +1,34 @@
+name: CI
+on:
+  pull_request_target:
+    types: [assigned, opened, synchronize, reopened]
+  push:
+    branches:
+      - master
+      - feature/docker-image
+
+jobs:
+  api_code_quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.6
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Install yarn and dependencies
+        run: |
+          npm install -g yarn
+          cd api
+          yarn
+          yarn --check-files
+
+      - name: Check code quality
+        run: |
+          cd api && yarn lint
