@@ -6,5 +6,19 @@
   "repository": "git@github.com:edumoreira1506/schedule-manager.git",
   "author": "Eduardo Moreira",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "type": "module",
+  "engines": {
+    "node": "14.6.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "i18next": "^19.7.0",
+    "swagger-ui-express": "^4.1.4"
+  },
+  "scripts": {
+    "dev": "nodemon index.js"
+  }
 }
