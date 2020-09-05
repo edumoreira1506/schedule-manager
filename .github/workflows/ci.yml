@@ -1,11 +1,11 @@
 name: CI
+
 on:
   pull_request_target:
     types: [assigned, opened, synchronize, reopened]
   push:
     branches:
       - master
-      - feature/docker-image
 
 jobs:
   api_code_quality:
