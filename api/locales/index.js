@@ -4,4 +4,4 @@ export default {
   'pt-BR': {
     translation: ptBR
   },
-}
+};

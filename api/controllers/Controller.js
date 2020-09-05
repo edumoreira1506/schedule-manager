@@ -32,7 +32,7 @@ export default class Controller {
           i18next.t('common.notAllowed')
         ],
       })
-    }
+    };
   }
 
   static authenticatedRemoveCallback(res) {
@@ -59,7 +59,7 @@ export default class Controller {
           i18next.t('common.notAllowed')
         ],
       })
-    }
+    };
   }
 
   static authenticatedStoreCallback(res, key) {
@@ -84,7 +84,7 @@ export default class Controller {
           i18next.t('common.notFound'),
         ],
       }),
-    }
+    };
   }
 
   static authenticatedFindCallback(res, key) {
@@ -103,7 +103,7 @@ export default class Controller {
           i18next.t('common.notAllowed')
         ]
       })
-    }
+    };
   }
 
   static authenticatedSearchCallback(res, key) {
