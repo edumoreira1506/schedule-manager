@@ -8,6 +8,7 @@ module.exports = {
         'ecmaVersion': 12,
         'sourceType': 'module'
     },
+    "ignorePatterns": [ "tests/*" ],
     'rules': {
         'indent': [
             'error',
