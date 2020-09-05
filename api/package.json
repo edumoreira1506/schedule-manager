@@ -16,9 +16,13 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "i18next": "^19.7.0",
+    "pg": "^8.3.3",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.3.5",
     "swagger-ui-express": "^4.1.4"
   },
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "db:create": "sequelize db:create"
   }
 }
