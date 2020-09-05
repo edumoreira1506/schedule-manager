@@ -1,0 +1,10 @@
+{
+  "name": "@schedule-manager/api",
+  "version": "1.0.0",
+  "description": "API to schedule manager app.",
+  "main": "index.js",
+  "repository": "git@github.com:edumoreira1506/schedule-manager.git",
+  "author": "Eduardo Moreira",
+  "license": "MIT",
+  "private": false
+}
