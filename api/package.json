@@ -1,0 +1,35 @@
+{
+  "name": "@schedule-manager/api",
+  "version": "1.0.0",
+  "description": "API to schedule manager app.",
+  "main": "index.js",
+  "repository": "git@github.com:edumoreira1506/schedule-manager.git",
+  "author": "Eduardo Moreira",
+  "license": "MIT",
+  "private": false,
+  "type": "module",
+  "engines": {
+    "node": "14.6.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "i18next": "^19.7.0",
+    "pg": "^8.3.3",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.3.5",
+    "swagger-ui-express": "^4.1.4"
+  },
+  "devDependencies": {
+    "eslint": "^7.8.1",
+    "jest": "^26.4.2"
+  },
+  "scripts": {
+    "dev": "nodemon index.js",
+    "db:create": "sequelize db:create",
+    "db:drop": "sequelize db:drop",
+    "lint": "eslint .",
+    "test": "jest ./tests"
+  }
+}

@@ -1,0 +1,5 @@
+# API Dependencies
+api/node_modules
+
+# API yarn files
+api/yarn-error.log

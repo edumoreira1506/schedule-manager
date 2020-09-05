@@ -1,0 +1,43 @@
+version: '3.8'
+
+x-app: &app
+  build:
+    context: .
+    dockerfile: Dockerfile
+  volumes:
+    - .:/home/schedule-manager
+  stdin_open: true
+  tty: true
+
+services:
+  api:
+    <<: *app
+    command: >
+      bash -c "cd api && npm i -g nodemon sequelize-cli && yarn && yarn add eslint && yarn db:drop && yarn db:create && yarn dev"
+    ports:
+      - 3500:3500
+      - 3000:3000
+    environment:
+      API_PORT: 3500
+      API_HOST: localhost:3500
+      DB_HOST: database
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: schedule-manager
+    depends_on:
+      - database
+
+  database:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+volumes:
+  pgdata:
+    driver: local
