@@ -77,3 +77,24 @@ export const show = async (token, userId, callback, dependencies) => await isAll
   ...callback,
   onAllowed: callback.onFound,
 }, dependencies);
+
+export const update = async (token, newProps, userId, callback, dependencies) => await isAllowedToEditData(token, userId, {
+  ...callback,
+  onAllowed: async user => {
+    const userDTO = UserMapper.toDTO(user);
+    const { repositories: { UserRepository } } = dependencies;
+
+    userDTO.decryptPassword(dependencies);
+    userDTO.confirmPassword = userDTO.password;
+    userDTO.addProps(newProps);
+
+    return userDTO.validate(dependencies, {
+      onInvalidated: callback.onError,
+      onValidated: async () => {
+        userDTO.encryptPassword(dependencies);
+
+        return await UserRepository.updateById(userId, newProps, callback);
+      }
+    });
+  }, 
+}, dependencies);

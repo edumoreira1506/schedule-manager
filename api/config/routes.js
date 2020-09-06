@@ -11,5 +11,6 @@ routes.post('/auth', UserController.login);
 routes.post('/user', UserController.store);
 routes.get('/user', UserController.index);
 routes.get('/user/:id', UserController.show);
+routes.patch('/user/:id', UserController.update);
 
 export default routes;

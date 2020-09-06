@@ -1,6 +1,6 @@
 import Controller from './Controller.js';
 import i18next from 'i18next';
-import { login, store, index, show } from '../models/User.js';
+import { login, store, index, show, update } from '../models/User.js';
 import { statusCodes } from '../config/constants.js';
 
 export default class UserController extends Controller {
@@ -34,6 +34,14 @@ export default class UserController extends Controller {
     const token = Controller.getToken(req);
 
     return await store(user, token, Controller.authenticatedStoreCallback(res, 'user'), Controller.dependencies);
+  }
+
+  static async update(req, res) {
+    const newProps = Controller.getBody(req);
+    const token = Controller.getToken(req);
+    const userId = Controller.getParam(req, 'id', 0);
+
+    return await update(token, newProps, userId, Controller.authenticatedUpdateCallback(res), Controller.dependencies);
   }
 
   static async index(req, res) {

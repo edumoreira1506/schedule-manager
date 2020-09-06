@@ -582,4 +582,76 @@ describe('User model', () => {
       expect(callback.onNotFound).toHaveBeenCalled();
     });
   });
+
+  describe('update', () => {
+    let callback;
+
+    beforeEach(() => {
+      callback = {
+        onNotAllowed: jest.fn(),
+        onError: jest.fn(),
+        onUpdated: jest.fn(),
+        onNotFound: jest.fn(),
+      }
+    });
+
+    it('has the correct behavior when user can be updated', async () => {
+      const token = 'token!';
+      const user = userFactory();
+      const newProps = { name: 'New Name Here' };
+      const fakeToken = {
+        decrypt: jest.fn().mockReturnValue(user),
+      };
+      const fakeEncrypt = {
+        encrypt: jest.fn().mockReturnValue(user.password),
+        decrypt: jest.fn().mockReturnValue(user.password),
+      };
+      const fakeUser = {
+        findById: jest.fn().mockReturnValue(user),
+        findByEmail: jest.fn().mockReturnValue(null),
+        updateById: (_, __, callback) => callback.onUpdated(),
+      };
+      const dependencies = dependenciesMock({
+        services: { Token: fakeToken, Encrypt: fakeEncrypt },
+        repositories: { UserRepository: fakeUser }
+      });
+
+      await User.update(token, newProps, user.id, callback, dependencies);
+
+      expect(callback.onNotAllowed).not.toHaveBeenCalled();
+      expect(callback.onError).not.toHaveBeenCalled();
+      expect(callback.onUpdated).toHaveBeenCalled();
+      expect(callback.onNotFound).not.toHaveBeenCalled();
+    });
+
+    it('has the correct behavior when user is not found', async () => {
+      const token = 'token!';
+      const user = null;
+      const userOfToken = userFactory();
+      const newProps = { name: 'New Name Here' };
+      const fakeToken = {
+        decrypt: jest.fn().mockReturnValue(userOfToken),
+      };
+      const fakeEncrypt = {
+        encrypt: jest.fn().mockReturnValue(null),
+        decrypt: jest.fn().mockReturnValue(null),
+      };
+      const fakeUser = {
+        findById: jest.fn().mockReturnValue(user),
+        findByEmail: jest.fn().mockReturnValue(null),
+        updateById: (_, __, callback) => callback.onUpdated(),
+      };
+      const dependencies = dependenciesMock({
+        services: { Token: fakeToken, Encrypt: fakeEncrypt },
+        repositories: { UserRepository: fakeUser }
+      });
+
+      await User.update(token, newProps, 1, callback, dependencies);
+
+      expect(callback.onNotAllowed).not.toHaveBeenCalled();
+      expect(callback.onError).not.toHaveBeenCalled();
+      expect(callback.onUpdated).not.toHaveBeenCalled();
+      expect(callback.onNotFound).toHaveBeenCalled();
+    });
+  });
 });

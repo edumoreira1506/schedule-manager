@@ -1,3 +1,5 @@
+import i18next from 'i18next';
+
 export default class Repository {
   constructor({ model }) {
     this.model = model;
@@ -22,6 +24,18 @@ export default class Repository {
       return test.dataValues;
     } catch {
       return null;
+    }
+  }
+
+  async updateById(id, newProps, callback) {
+    try {
+      await this.model.update(newProps, {
+        where: {
+          id,
+        }
+      }).then(callback.onUpdated).catch(callback.onError);
+    } catch {
+      return callback.onError([ i18next.t('somethingWrong') ]);
     }
   }
 }
