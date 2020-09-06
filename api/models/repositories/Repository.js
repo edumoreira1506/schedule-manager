@@ -10,4 +10,18 @@ export default class Repository {
       return null;
     }
   }
+
+  async findById(id) {
+    if (!id) return null;
+  
+    try {
+      const test = await this.model.findByPk(id);
+  
+      if (!test) return null;
+  
+      return test.dataValues;
+    } catch {
+      return null;
+    }
+  }
 }

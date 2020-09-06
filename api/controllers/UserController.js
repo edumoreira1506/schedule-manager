@@ -1,6 +1,6 @@
 import Controller from './Controller.js';
 import i18next from 'i18next';
-import { login, store, index } from '../models/User.js';
+import { login, store, index, show } from '../models/User.js';
 import { statusCodes } from '../config/constants.js';
 
 export default class UserController extends Controller {
@@ -20,6 +20,13 @@ export default class UserController extends Controller {
         ]
       }),
     }, Controller.dependencies);
+  }
+
+  static async show(req, res) {
+    const userId = Controller.getParam(req, 'id', 0);
+    const token = Controller.getToken(req);
+
+    return await show(token, userId, Controller.authenticatedFindCallback(res, 'user'), Controller.dependencies);
   }
 
   static async store(req, res) {

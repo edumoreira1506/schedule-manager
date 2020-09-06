@@ -480,4 +480,106 @@ describe('User model', () => {
       expect(callback.onFound).not.toHaveBeenCalled();
     });
   });
+
+  describe('show', () => {
+    let callback;
+
+    beforeEach(() => {
+      callback = {
+        onNotAllowed: jest.fn(),
+        onFound: jest.fn(),
+        onNotFound: jest.fn(),
+      }
+    });
+
+    it('has the correct behavior when user of token is admin', async () => {
+      const token = 'token!';
+      const user = userFactory();
+      const userId = 1;
+      const fakeToken = {
+        decrypt: jest.fn().mockReturnValue(user),
+      };
+      const fakeUser = {
+        findById: jest.fn().mockReturnValue(user),
+      }
+      const dependencies = dependenciesMock({
+        services: { Token: fakeToken },
+        repositories: { UserRepository: fakeUser },
+      });
+
+      await User.show(token, userId, callback, dependencies);
+
+      expect(callback.onNotAllowed).not.toHaveBeenCalled();
+      expect(callback.onFound).toHaveBeenCalledWith(user);
+      expect(callback.onNotFound).not.toHaveBeenCalled();
+    });
+
+    it('has the correct behavior when is same user', async () => {
+      const token = 'token!';
+      const user = userFactory({ isAdmin: false });
+      const userId = 1;
+      const fakeToken = {
+        decrypt: jest.fn().mockReturnValue(user),
+      };
+      const fakeUserRepository = {
+        findById: jest.fn().mockReturnValue(user),
+      }
+      const dependencies = dependenciesMock({
+        services: { Token: fakeToken },
+        repositories: { UserRepository: fakeUserRepository },
+      });
+
+      await User.show(token, userId, callback, dependencies);
+
+      expect(callback.onNotAllowed).not.toHaveBeenCalled();
+      expect(callback.onFound).toHaveBeenCalledWith(user);
+      expect(callback.onNotFound).not.toHaveBeenCalled();
+    });
+
+    it('has the correct behavior when is not same user and is not admin', async () => {
+      const token = 'token!';
+      const user = userFactory({ isAdmin: false });
+      const anotherUser = userFactory({ ...user, id: user.id + 1 });
+      const userId = 1;
+      const fakeToken = {
+        decrypt: jest.fn().mockReturnValue(anotherUser),
+      };
+      const fakeUserRepository = {
+        findById: jest.fn().mockReturnValue(user),
+      }
+      const dependencies = dependenciesMock({
+        services: { Token: fakeToken },
+        repositories: { UserRepository: fakeUserRepository },
+      });
+
+      await User.show(token, userId, callback, dependencies);
+
+      expect(callback.onNotAllowed).toHaveBeenCalled();
+      expect(callback.onFound).not.toHaveBeenCalled();
+      expect(callback.onNotFound).not.toHaveBeenCalled();
+    });
+
+    it('has the correct behavior when is not found user', async () => {
+      const token = 'token!';
+      const userOfToken = userFactory();
+      const user = null;
+      const userId = 1;
+      const fakeToken = {
+        decrypt: jest.fn().mockReturnValue(userOfToken),
+      };
+      const fakeUserRepository = {
+        findById: jest.fn().mockReturnValue(user),
+      }
+      const dependencies = dependenciesMock({
+        services: { Token: fakeToken },
+        repositories: { UserRepository: fakeUserRepository },
+      });
+
+      await User.show(token, userId, callback, dependencies);
+
+      expect(callback.onNotAllowed).not.toHaveBeenCalled();
+      expect(callback.onFound).not.toHaveBeenCalled();
+      expect(callback.onNotFound).toHaveBeenCalled();
+    });
+  });
 });

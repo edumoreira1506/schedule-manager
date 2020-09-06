@@ -28,6 +28,12 @@ export default class Controller {
     return bodyParam;
   }
 
+  static getParam(req, param, defaultValue = {}) {
+    const bodyParam = req?.params?.[param] ?? defaultValue;
+
+    return bodyParam;
+  }
+
   static authenticatedUpdateCallback(res) {
     return {
       onError: errors => res.status(statusCodes.ERROR).send({

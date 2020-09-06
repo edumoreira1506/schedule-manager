@@ -65,3 +65,9 @@ export const countPages = async () => {
 
   return amountOfPages;
 };
+
+export const findById = async id => {
+  const repository = new Repository({ model: User });
+  
+  return await repository.findById(id);
+};

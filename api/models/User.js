@@ -55,3 +55,25 @@ export const index = async (token, keyWord, page, callback, dependencies) => {
 
   return callback.onFound(users, pages);
 };
+
+const isAllowedToEditData = async (token, userId, callback, dependencies) => {
+  const { services: { Token }, repositories: { UserRepository } } = dependencies;
+  const userOfToken = Token.decrypt(token);
+
+  if (!userOfToken) return callback.onNotAllowed();
+
+  const user = await UserRepository.findById(userId);
+
+  if (!user) return callback.onNotFound();
+
+  const userDTO = UserMapper.toDTO(userOfToken);
+
+  if (!userDTO.isAdmin && !userDTO.isSameUser(user)) return callback.onNotAllowed();
+
+  return callback.onAllowed(user);
+};
+
+export const show = async (token, userId, callback, dependencies) => await isAllowedToEditData(token, userId, {
+  ...callback,
+  onAllowed: callback.onFound,
+}, dependencies);
