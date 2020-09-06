@@ -13,7 +13,7 @@ services:
   api:
     <<: *app
     command: >
-      bash -c "cd api && npm i -g nodemon sequelize-cli && yarn && yarn db:setup && yarn dev"
+      bash -c "cd api && npm i -g nodemon sequelize-cli && yarn && yarn test && yarn db:setup && yarn dev"
     ports:
       - 3500:3500
       - 3000:3000

@@ -1,11 +1,25 @@
 import { statusCodes } from '../config/constants.js';
+import repositories from '../models/repositories/index.js';
+import services from '../services/index.js';
 import i18next from 'i18next';
 
 export default class Controller {
+  // eslint-disable-next-line
+  static dependencies = {
+    repositories,
+    services,
+  };
+
   static getToken(req) {
     const token = req?.header('Authorization') ?? '';
 
     return token;
+  }
+
+  static getBody(req, defaultValue = {}) {
+    const body = req?.body ?? defaultValue;
+
+    return body;
   }
 
   static authenticatedUpdateCallback(res) {
@@ -17,19 +31,19 @@ export default class Controller {
       onUpdated: () => res.status(statusCodes.UPDATED).send({
         ok: true,
         errors: [
-          i18next.t('common.successfullyUpdated')
+          i18next.t('successfullyUpdated')
         ]
       }),
       onNotFound: () => res.status(statusCodes.NOT_FOUND).send({
         ok: false,
         errors: [
-          i18next.t('common.notFound'),
+          i18next.t('notFound'),
         ],
       }),
       onNotAllowed: () => res.status(statusCodes.NOT_ALLOWED).send({
         ok: false,
         errors: [
-          i18next.t('common.notAllowed')
+          i18next.t('notAllowed')
         ],
       })
     };
@@ -44,19 +58,19 @@ export default class Controller {
       onDeleted: () => res.status(statusCodes.OK).send({
         ok: true,
         errors: [
-          i18next.t('common.successfullyRemoved'),
+          i18next.t('successfullyRemoved'),
         ],
       }),
       onNotFound: () => res.status(statusCodes.NOT_FOUND).send({
         ok: false,
         errors: [
-          i18next.t('common.notFound'),
+          i18next.t('notFound'),
         ],
       }),
       onNotAllowed: () => res.status(statusCodes.NOT_ALLOWED).send({
         ok: false,
         errors: [
-          i18next.t('common.notAllowed')
+          i18next.t('notAllowed')
         ],
       })
     };
@@ -75,13 +89,13 @@ export default class Controller {
       onNotAllowed: () => res.status(statusCodes.NOT_ALLOWED).send({
         ok: false,
         errors: [
-          i18next.t('common.notAllowed')
+          i18next.t('notAllowed')
         ]
       }),
       onNotFound: () => res.status(statusCodes.NOT_FOUND).send({
         ok: false,
         errors: [
-          i18next.t('common.notFound'),
+          i18next.t('notFound'),
         ],
       }),
     };
@@ -95,12 +109,12 @@ export default class Controller {
       }),
       onNotFound: () => res.status(statusCodes.NOT_FOUND).send({
         ok: false,
-        error: i18next.t('common.notFound')
+        error: i18next.t('notFound')
       }),
       onNotAllowed: () => res.status(statusCodes.NOT_ALLOWED).send({
         ok: false,
         errors: [
-          i18next.t('common.notAllowed')
+          i18next.t('notAllowed')
         ]
       })
     };
@@ -116,13 +130,13 @@ export default class Controller {
       onNotAllowed: () => res.status(statusCodes.NOT_ALLOWED).send({
         ok: false,
         errors: [
-          i18next.t('common.notAllowed')
+          i18next.t('notAllowed')
         ]
       }),
       onNotFound: () => res.status(statusCodes.NOT_FOUND).send({
         ok: false,
         errors: [
-          i18next.t('common.notFound')
+          i18next.t('notFound')
         ]
       })
     };

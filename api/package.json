@@ -12,11 +12,15 @@
     "node": "14.6.0"
   },
   "dependencies": {
+    "@babel/preset-env": "^7.11.0",
+    "babel-eslint": "^10.1.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "crypto-js": "^4.0.0",
+    "email-validator": "^2.0.4",
     "express": "^4.17.1",
     "i18next": "^19.7.0",
+    "lodash": "^4.17.20",
     "moment": "^2.27.0",
     "pg": "^8.3.3",
     "pg-hstore": "^2.3.3",
@@ -36,5 +40,11 @@
     "db:setup": "sequelize db:drop && sequelize db:create && sequelize db:migrate && sequelize db:seed:all",
     "lint": "eslint .",
     "test": "jest ./tests"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   }
 }
