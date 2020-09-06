@@ -54,6 +54,6 @@ jobs:
           yarn
           yarn --check-files
 
-      - name: Check code quality
+      - name: Running tests
         run: |
           cd api && yarn test
