@@ -1,11 +1,6 @@
 name: CI
 
-on:
-  pull_request_target:
-    types: [assigned, opened, synchronize, reopened]
-  push:
-    branches:
-      - master
+on: [push]
 
 jobs:
   api_code_quality:
@@ -54,6 +49,6 @@ jobs:
           yarn
           yarn --check-files
 
-      - name: Check code quality
+      - name: Running tests
         run: |
           cd api && yarn test

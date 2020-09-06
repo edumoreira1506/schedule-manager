@@ -259,12 +259,16 @@ describe('User model', () => {
       const fakeToken = {
         decrypt: jest.fn().mockReturnValue(user),
       };
+      const fakeEncrypt = {
+        encrypt: jest.fn().mockReturnValue(user.password),
+        decrypt: jest.fn().mockReturnValue(user.password),
+      };
       const fakeUser = {
         findByEmail: jest.fn().mockReturnValue(null),
         save: jest.fn().mockReturnValue(user),
       };
       const dependencies = dependenciesMock({
-        services: { Token: fakeToken },
+        services: { Token: fakeToken, Encrypt: fakeEncrypt },
         repositories: { UserRepository: fakeUser }
       });
 
@@ -278,6 +282,10 @@ describe('User model', () => {
     it('has the correct behavior when user does not send token', async () => {
       const token = null;
       const user = userFactory();
+      const fakeEncrypt = {
+        encrypt: jest.fn().mockReturnValue(user.password),
+        decrypt: jest.fn().mockReturnValue(user.password),
+      };
       const fakeToken = {
         decrypt: jest.fn().mockReturnValue(user),
       };
@@ -286,7 +294,7 @@ describe('User model', () => {
         save: jest.fn().mockReturnValue(user),
       };
       const dependencies = dependenciesMock({
-        services: { Token: fakeToken },
+        services: { Token: fakeToken, Encrypt: fakeEncrypt },
         repositories: { UserRepository: fakeUser }
       });
   
