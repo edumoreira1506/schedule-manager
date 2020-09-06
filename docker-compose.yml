@@ -13,10 +13,9 @@ services:
   api:
     <<: *app
     command: >
-      bash -c "cd api && npm i -g nodemon sequelize-cli && yarn && yarn test && yarn db:setup && yarn dev"
+      bash -c "cd api && npm i -g nodemon sequelize-cli && yarn && yarn db:setup && yarn dev"
     ports:
       - 3500:3500
-      - 3000:3000
     environment:
       API_PORT: 3500
       API_HOST: localhost:3500
@@ -27,6 +26,15 @@ services:
       CRYPTO_KEY: qwert
     depends_on:
       - database
+
+  client:
+    <<: *app
+    command: >
+      bash -c "cd client && yarn && yarn start"
+    ports:
+      - 3000:3000
+    depends_on:
+      - api
 
   database:
     image: postgres
