@@ -1,7 +1,27 @@
 import Controller from './Controller.js';
-import { store } from '../models/User.js';
+import i18next from 'i18next';
+import { login, store } from '../models/User.js';
+import { statusCodes } from '../config/constants.js';
 
 export default class UserController extends Controller {
+  static async login(req, res) {
+    const { email, password } = Controller.getBody(req);
+
+    return await login(email, password, {
+      onAllowed: (user, token) => res.status(statusCodes.OK).send({ 
+        ok: true,
+        user,
+        token,
+      }),
+      onNotAllowed: () => res.status(statusCodes.NOT_ALLOWED).send({
+        ok: false,
+        errors: [
+          i18next.t('invalidAuth')
+        ]
+      }),
+    }, Controller.dependencies);
+  }
+
   static async store(req, res) {
     const user = Controller.getBody(req);
     const token = Controller.getToken(req);

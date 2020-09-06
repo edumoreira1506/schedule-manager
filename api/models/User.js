@@ -1,5 +1,25 @@
 import UserMapper from './mappers/UserMapper.js';
 
+export const login = async (email, password, callback, dependencies) => {
+  if (!email || !password) return callback.onNotAllowed();
+
+  const {
+    repositories: { UserRepository },
+    services: { Encrypt, Token },
+  } = dependencies;
+  const user = await UserRepository.findByEmail(email);
+
+  if (!user) return callback.onNotAllowed();
+
+  const decryptedPassword = Encrypt.decrypt(user.password);
+
+  if(decryptedPassword !== password) return callback.onNotAllowed();
+
+  const token = Token.create(user);
+
+  return callback.onAllowed(user, token);
+};
+
 export const store = async (user, token, callback, dependencies) => {
   const userDTO = UserMapper.toDTO(user);
 

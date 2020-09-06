@@ -342,4 +342,81 @@ describe('User model', () => {
       expect(callback.onSaved).not.toHaveBeenCalled();
     });
   });
+
+  describe('login', () => {
+    let callback;
+
+    beforeEach(() => {
+      callback = {
+        onAllowed: jest.fn(),
+        onNotAllowed: jest.fn(),
+      }
+    });
+
+    it('has the correct behavior when user does not send email or password', async () => {
+      const dependencies = dependenciesMock();
+      const email = null;
+      const password = null;
+
+      await User.login(email, password, callback, dependencies);
+
+      expect(callback.onNotAllowed).toHaveBeenCalled();
+      expect(callback.onAllowed).not.toHaveBeenCalled();
+    });
+
+    it('has the correct behavior when email does not exist ou our database', async () => {
+      const fakeUserRepository = {
+        findByEmail: jest.fn().mockReturnValue(null)
+      };
+      const dependencies = dependenciesMock({ repositories: { UserRepository: fakeUserRepository } });
+      const email = 'email@email.com';
+      const password = 'Password10#';
+
+      await User.login(email, password, callback, dependencies);
+
+      expect(callback.onNotAllowed).toHaveBeenCalled();
+      expect(callback.onAllowed).not.toHaveBeenCalled();
+    });
+
+    it('has the correct behavior when the pasword is different', async () => {
+      const password = 'Password10#';
+      const wrongPassword = 'foo-bar';
+      const user = userFactory({ password });
+      const fakeUserRepository = {
+        findByEmail: jest.fn().mockReturnValue(user)
+      };
+      const dependencies = dependenciesMock({ repositories: { UserRepository: fakeUserRepository } });
+      const email = 'email@email.com';
+
+      await User.login(email, wrongPassword, callback, dependencies);
+
+      expect(callback.onNotAllowed).toHaveBeenCalled();
+      expect(callback.onAllowed).not.toHaveBeenCalled();
+    });
+
+    it('has the correct bevaior when are valid credentials', async () => {
+      const password = 'Password10#';
+      const email = 'email@email.com';
+      const token = 'token!';
+      const user = userFactory({ email, password });
+      const fakeUserRepository = {
+        findByEmail: jest.fn().mockReturnValue(user),
+      };
+      const fakeEncrypt = {
+        decrypt: jest.fn().mockReturnValue(password),
+      };
+      const fakeToken = {
+        create: jest.fn().mockReturnValue(token),
+      }
+      const dependencies = dependenciesMock({
+        repositories: { UserRepository: fakeUserRepository },
+        services: { Encrypt: fakeEncrypt, Token: fakeToken }
+      });
+
+      await User.login(email, password, callback, dependencies);
+
+      expect(callback.onNotAllowed).not.toHaveBeenCalled();
+      expect(callback.onAllowed).toHaveBeenCalledWith(user, token);
+    });
+  });
 });

@@ -6,6 +6,8 @@ const routes = express.Router();
 
 routes.get('/', HomeController.index);
 
+routes.post('/auth', UserController.login);
+
 routes.post('/user', UserController.store);
 
 export default routes;

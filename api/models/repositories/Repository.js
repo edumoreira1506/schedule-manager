@@ -5,7 +5,7 @@ export default class Repository {
 
   async save(entity) {
     try {
-      await this.model.create(entity);
+      return await this.model.create(entity);
     } catch {
       return null;
     }
