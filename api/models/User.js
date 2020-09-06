@@ -78,6 +78,15 @@ export const show = async (token, userId, callback, dependencies) => await isAll
   onAllowed: callback.onFound,
 }, dependencies);
 
+export const remove = async (token, userId, callback, dependencies) => await isAllowedToEditData(token, userId, {
+  ...callback,
+  onAllowed: async user => {
+    const { repositories: { UserRepository } } = dependencies;
+
+    return await UserRepository.deleteById(user.id, callback);
+  },
+}, dependencies);
+
 export const update = async (token, newProps, userId, callback, dependencies) => await isAllowedToEditData(token, userId, {
   ...callback,
   onAllowed: async user => {

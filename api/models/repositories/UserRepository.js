@@ -77,3 +77,9 @@ export const updateById = async (id, newProps, callback) => {
 
   return await repository.updateById(id, newProps, callback);
 };
+
+export const deleteById = async (id, callback) => {
+  const repository = new Repository({ model: User });
+
+  return await repository.deleteById(id, callback);
+};

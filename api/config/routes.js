@@ -12,5 +12,6 @@ routes.post('/user', UserController.store);
 routes.get('/user', UserController.index);
 routes.get('/user/:id', UserController.show);
 routes.patch('/user/:id', UserController.update);
+routes.delete('/user/:id', UserController.remove);
 
 export default routes;

@@ -38,4 +38,16 @@ export default class Repository {
       return callback.onError([ i18next.t('somethingWrong') ]);
     }
   }
+
+  async deleteById(id, callback) {
+    try {
+      await this.model.destroy({
+        where: {
+          id
+        }
+      }).then(callback.onDeleted).catch(callback.onError);
+    } catch {
+      return callback.onError([ i18next.t('somethingWrong') ]);
+    }
+  }
 }

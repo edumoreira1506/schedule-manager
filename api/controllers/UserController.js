@@ -1,6 +1,6 @@
 import Controller from './Controller.js';
 import i18next from 'i18next';
-import { login, store, index, show, update } from '../models/User.js';
+import { login, store, index, show, update, remove } from '../models/User.js';
 import { statusCodes } from '../config/constants.js';
 
 export default class UserController extends Controller {
@@ -50,5 +50,12 @@ export default class UserController extends Controller {
     const page = Controller.getBodyParam(req, 'page', 0);
 
     return await index(token, keyWord, page, Controller.authenticatedSearchCallback(res, 'users'), Controller.dependencies);
+  }
+
+  static async remove(req, res) {
+    const token = Controller.getToken(req);
+    const userId = Controller.getParam(req, 'id', 0);
+
+    return await remove(token, userId, Controller.authenticatedRemoveCallback(res), Controller.dependencies);
   }
 }
