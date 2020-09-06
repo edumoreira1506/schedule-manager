@@ -23,5 +23,5 @@ $ docker build .
 
 Up api container image:
 ```console
-$ docker-compose up api
+$ docker-compose up client
 ```
