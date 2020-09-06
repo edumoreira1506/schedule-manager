@@ -13,7 +13,7 @@ services:
   api:
     <<: *app
     command: >
-      bash -c "cd api && npm i -g nodemon sequelize-cli && yarn && yarn add eslint && yarn db:drop && yarn db:create && yarn dev"
+      bash -c "cd api && npm i -g nodemon sequelize-cli && yarn && yarn test && yarn db:setup && yarn dev"
     ports:
       - 3500:3500
       - 3000:3000
@@ -24,6 +24,7 @@ services:
       DB_USERNAME: postgres
       DB_PASSWORD: postgres
       DB_NAME: schedule-manager
+      CRYPTO_KEY: qwert
     depends_on:
       - database
 

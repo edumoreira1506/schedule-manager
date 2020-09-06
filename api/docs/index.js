@@ -1,3 +1,5 @@
+import user from './user.js';
+
 export default {
   swagger: '2.0',
   title : 'Schedule API - Documentation',
@@ -8,5 +10,7 @@ export default {
   schemes: [ 'http', 'https' ],
   consumes: [ 'application/json' ],
   produces: [ 'application/json' ],
-  paths: {},
+  paths: {
+    ...user,
+  },
 };

@@ -6,3 +6,5 @@ export const statusCodes = {
   NOT_FOUND: 404,
   UPDATED: 202,
 };
+
+export const ITEMS_PER_PAGE = 15;
