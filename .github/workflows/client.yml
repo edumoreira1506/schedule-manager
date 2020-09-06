@@ -52,3 +52,28 @@ jobs:
       - name: Running tests
         run: |
           cd client && yarn test
+
+  client_code_quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.6
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Install yarn and dependencies
+        run: |
+          npm install -g yarn
+          cd client
+          yarn
+          yarn --check-files
+
+      - name: Check code quality
+        run: |
+          cd client && yarn lint
