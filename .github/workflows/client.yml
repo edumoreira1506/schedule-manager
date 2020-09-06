@@ -26,7 +26,7 @@ jobs:
 
       - name: Build
         run: |
-          yarn build
+          cd client && yarn build
 
   client_tests:
     runs-on: ubuntu-latest
