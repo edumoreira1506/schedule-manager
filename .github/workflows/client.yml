@@ -1,9 +1,9 @@
-name: CI
+name: Client
 
 on: [push]
 
 jobs:
-  api_code_quality:
+  client_build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -20,15 +20,15 @@ jobs:
       - name: Install yarn and dependencies
         run: |
           npm install -g yarn
-          cd api
+          cd client
           yarn
           yarn --check-files
 
-      - name: Check code quality
+      - name: Build
         run: |
-          cd api && yarn lint
+          yarn build
 
-  api_tests:
+  client_tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -45,10 +45,10 @@ jobs:
       - name: Install yarn and dependencies
         run: |
           npm install -g yarn
-          cd api
+          cd client
           yarn
           yarn --check-files
 
       - name: Running tests
         run: |
-          cd api && yarn test
+          cd client && yarn test
