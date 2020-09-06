@@ -9,5 +9,6 @@ routes.get('/', HomeController.index);
 routes.post('/auth', UserController.login);
 
 routes.post('/user', UserController.store);
+routes.get('/user', UserController.index);
 
 export default routes;

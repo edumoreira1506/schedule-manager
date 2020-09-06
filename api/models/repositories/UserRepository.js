@@ -1,5 +1,7 @@
 import Sequelize from 'sequelize';
 import Repository from './Repository.js';
+import Pages from '../../services/Pages.js';
+import { ITEMS_PER_PAGE } from '../../config/constants.js';
 
 const { Model, DataTypes } = Sequelize;
 
@@ -40,3 +42,26 @@ export const findByEmail = async email => {
   }
 };
 
+export const search = async (keyWord = '', page = 0) => await User.findAll({
+  where: {
+    [Sequelize.Op.or]: [
+      {
+        email: {
+          [Sequelize.Op.like]: `%${keyWord}%`
+        }
+      },
+    ],
+  },
+  order: [
+    ['id', 'ASC'],
+  ],
+  offset: page * ITEMS_PER_PAGE,
+  limit: ITEMS_PER_PAGE
+});
+
+export const countPages = async () => {
+  const amount = await User.count();
+  const amountOfPages = Pages.calcPages(amount);
+
+  return amountOfPages;
+};

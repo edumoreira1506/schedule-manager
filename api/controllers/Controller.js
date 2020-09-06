@@ -22,6 +22,12 @@ export default class Controller {
     return body;
   }
 
+  static getBodyParam(req, param, defaultValue = {}) {
+    const bodyParam = req?.body?.[param] ?? defaultValue;
+
+    return bodyParam;
+  }
+
   static authenticatedUpdateCallback(res) {
     return {
       onError: errors => res.status(statusCodes.ERROR).send({

@@ -419,4 +419,65 @@ describe('User model', () => {
       expect(callback.onAllowed).toHaveBeenCalledWith(user, token);
     });
   });
+
+  describe('index', () => {
+    let callback;
+
+    beforeEach(() => {
+      callback = {
+        onNotAllowed: jest.fn(),
+        onFound: jest.fn(),
+      }
+    });
+
+    it('has the correct behavior when user is admin', async () => {
+      const token = 'token!';
+      const user = userFactory();
+      const keyword = '';
+      const page = 0;
+      const pages = 0;
+      const users = [];
+      const fakeToken = {
+        decrypt: jest.fn().mockReturnValue(user),
+      };
+      const fakeUser = {
+        search: jest.fn().mockReturnValue(users),
+        countPages: jest.fn().mockReturnValue(pages),
+      };
+      const dependencies = dependenciesMock({
+        services: { Token: fakeToken },
+        repositories: { UserRepository: fakeUser }
+      });
+
+      await User.index(token, keyword, page, callback, dependencies);
+
+      expect(callback.onNotAllowed).not.toHaveBeenCalled();
+      expect(callback.onFound).toHaveBeenCalledWith(users, pages);
+    });
+
+    it('has the correct behavior when user is not admin', async () => {
+      const token = 'token!';
+      const user = userFactory({ isAdmin: false });
+      const keyword = '';
+      const page = 0;
+      const pages = 0;
+      const users = [];
+      const fakeToken = {
+        decrypt: jest.fn().mockReturnValue(user),
+      };
+      const fakeUser = {
+        search: jest.fn().mockReturnValue(users),
+        countPages: jest.fn().mockReturnValue(pages),
+      };
+      const dependencies = dependenciesMock({
+        services: { Token: fakeToken },
+        repositories: { UserRepository: fakeUser },
+      });
+
+      await User.index(token, keyword, page, callback, dependencies);
+
+      expect(callback.onNotAllowed).toHaveBeenCalled();
+      expect(callback.onFound).not.toHaveBeenCalled();
+    });
+  });
 });

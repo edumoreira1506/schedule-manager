@@ -1,6 +1,6 @@
 import Controller from './Controller.js';
 import i18next from 'i18next';
-import { login, store } from '../models/User.js';
+import { login, store, index } from '../models/User.js';
 import { statusCodes } from '../config/constants.js';
 
 export default class UserController extends Controller {
@@ -27,5 +27,13 @@ export default class UserController extends Controller {
     const token = Controller.getToken(req);
 
     return await store(user, token, Controller.authenticatedStoreCallback(res, 'user'), Controller.dependencies);
+  }
+
+  static async index(req, res) {
+    const token = Controller.getToken(req);
+    const keyWord = Controller.getBodyParam(req, 'keyword', '');
+    const page = Controller.getBodyParam(req, 'page', 0);
+
+    return await index(token, keyWord, page, Controller.authenticatedSearchCallback(res, 'users'), Controller.dependencies);
   }
 }

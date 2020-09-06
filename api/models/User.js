@@ -39,3 +39,19 @@ export const store = async (user, token, callback, dependencies) => {
     onInvalidated: callback.onError
   });
 };
+
+export const index = async (token, keyWord, page, callback, dependencies) => {
+  const { services: { Token }, repositories: { UserRepository } } = dependencies;
+  const userOfToken = Token.decrypt(token);
+
+  if (!userOfToken) return callback.onNotAllowed();
+
+  const userDTO = UserMapper.toDTO(userOfToken);
+
+  if (!userDTO.isAdmin) return callback.onNotAllowed();
+
+  const users = await UserRepository.search(keyWord, page);
+  const pages = await UserRepository.countPages();
+
+  return callback.onFound(users, pages);
+};
