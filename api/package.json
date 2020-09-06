@@ -29,6 +29,8 @@
     "dev": "nodemon index.js",
     "db:create": "sequelize db:create",
     "db:drop": "sequelize db:drop",
+    "db:migrate": "sequelize db:migrate",
+    "db:setup": "sequelize db:drop && sequelize db:create && sequelize db:migrate",
     "lint": "eslint .",
     "test": "jest ./tests"
   }
