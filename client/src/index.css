@@ -1,0 +1,36 @@
+body {
+  overflow: hidden;
+  margin: 0;
+}
+
+.Flex {
+  display: flex;
+}
+
+.Flex--justify-center {
+  justify-content: center;
+}
+
+.Flex--justify-start {
+  justify-content: flex-start;
+}
+
+.Flex--justify-between {
+  justify-content: space-between;
+}
+
+.Flex--justify-end {
+  justify-content: flex-end;
+}
+
+.Flex--align-center {
+  align-items: center;
+}
+
+.Flex--align-start {
+  align-items: flex-start;
+}
+
+.Flex--vertical-alignment {
+  flex-direction: column;
+}
