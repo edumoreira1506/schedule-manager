@@ -1,4 +1,5 @@
 import user from './user.js';
+import task from './task.js';
 
 export default {
   swagger: '2.0',
@@ -12,5 +13,6 @@ export default {
   produces: [ 'application/json' ],
   paths: {
     ...user,
+    ...task,
   },
 };

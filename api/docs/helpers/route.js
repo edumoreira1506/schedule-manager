@@ -6,6 +6,7 @@ export default ({
   needsToken = true,
   bodyParams = null,
   pathParams = [],
+  queryParams = [],
   route,
 }) => ({
   [route]: {
@@ -37,6 +38,14 @@ export default ({
           type: pathParam.type
         }
       })),
+      ...queryParams.map(queryParam => ({
+        in: 'query',
+        name: queryParam.name,
+        description: queryParam.description,
+        schema: {
+          type: queryParam.type,
+        }
+      }))
     ].filter(Boolean),
     responses: {
       [statusCodes.ERROR]: {

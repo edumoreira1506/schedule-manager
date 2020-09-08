@@ -46,8 +46,8 @@ export default class UserController extends Controller {
 
   static async index(req, res) {
     const token = Controller.getToken(req);
-    const keyWord = Controller.getBodyParam(req, 'keyword', '');
-    const page = Controller.getBodyParam(req, 'page', 0);
+    const keyWord = Controller.getQueryParam(req, 'keyword', '');
+    const page = Controller.getQueryParam(req, 'page', 0);
 
     return await index(token, keyWord, page, Controller.authenticatedSearchCallback(res, 'users'), Controller.dependencies);
   }

@@ -56,6 +56,19 @@ export const index = async (token, keyWord, page, callback, dependencies) => {
   return callback.onFound(users, pages);
 };
 
+export const authenticateAsAdmin = async (token, callback, dependencies) => {
+  const { services: { Token } } = dependencies;
+  const userOfToken = Token.decrypt(token);
+
+  if (!userOfToken) return callback.onNotAllowed();
+
+  const userDTO = UserMapper.toDTO(userOfToken);
+
+  if (!userDTO.isAdmin) return callback.onNotAllowed();
+
+  return callback.onAllowed(userDTO);
+};
+
 const isAllowedToEditData = async (token, userId, callback, dependencies) => {
   const { services: { Token }, repositories: { UserRepository } } = dependencies;
   const userOfToken = Token.decrypt(token);

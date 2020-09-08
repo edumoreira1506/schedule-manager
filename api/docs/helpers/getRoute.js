@@ -6,11 +6,13 @@ export default ({
   needsToken = true,
   bodyParams = null,
   pathParams = [],
+  queryParams = [],
 }) => route({
   title,
   category,
   needsToken,
   bodyParams,
   pathParams,
-  route: 'get'
+  route: 'get',
+  queryParams
 });
