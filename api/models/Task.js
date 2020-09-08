@@ -1,12 +1,13 @@
 import TaskMapper from './mappers/TaskMapper.js';
-import { show, authenticateAsAdmin } from './User.js';
+import { show as showUser, authenticateAsAdmin } from './User.js';
+import UserMapper from './mappers/UserMapper.js';
 
 export const taskTemplate = (task, user) => ({
   ...task,
   responsible: user.id
 });
 
-export const store = async (task, userId, token, callback, dependencies) => await show(token, userId, {
+export const store = async (task, userId, token, callback, dependencies) => await showUser(token, userId, {
   ...callback,
   onFound: user => {
     const taskDTO = TaskMapper.toDTO(task);
@@ -36,7 +37,21 @@ export const all = async (token, filters, callback, dependencies) => await authe
   onAllowed: async () => await searchTasks(filters, dependencies, callback.onFound),
 }, dependencies);
 
-export const index = async (token, userId, filters, callback, dependencies) => await show(token, userId, {
+export const index = async (token, userId, filters, callback, dependencies) => await showUser(token, userId, {
   ...callback,
   onFound: async () => await searchTasks(filters, dependencies, callback.onFound),
+}, dependencies);
+
+export const show = async (token, userId, taskId, callback, dependencies) => await showUser(token, userId, {
+  ...callback,
+  onFound: async user => {
+    const userDTO = UserMapper.toDTO(user);
+    const { repositories: { TaskRepository } } = dependencies;
+    const task = await TaskRepository.findById(taskId);
+
+    if (!task) return callback.onNotFound();
+    if (task.responsible !== Number(userId) && !userDTO.isAdmin) return callback.onNotAllowed();
+
+    return callback.onFound(task);
+  }
 }, dependencies);

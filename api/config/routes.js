@@ -19,5 +19,6 @@ routes.get('/task', TaskController.all);
 
 routes.post('/user/:userId/task', TaskController.store);
 routes.get('/user/:userId/task', TaskController.index);
+routes.get('/user/:userId/task/:taskId', TaskController.show);
 
 export default routes;

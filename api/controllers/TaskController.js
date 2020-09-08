@@ -1,5 +1,5 @@
 import Controller from './Controller.js';
-import { store, all, index } from '../models/Task.js';
+import { store, all, index, show } from '../models/Task.js';
 
 export default class TaskController extends Controller {
   static async store(req, res) {
@@ -32,5 +32,13 @@ export default class TaskController extends Controller {
     const filters = { keyWord, page, userId, finishedAt, startedAt };
 
     return await index(token, userId, filters, Controller.authenticatedSearchCallback(res, 'tasks'), Controller.dependencies);
+  }
+
+  static async show(req, res) {
+    const token = Controller.getToken(req);
+    const userId = Controller.getParam(req, 'userId', null);
+    const taskId = Controller.getParam(req, 'taskId', null);
+
+    return await show(token, userId, taskId, Controller.authenticatedFindCallback(res, 'task'), Controller.dependencies);
   }
 }

@@ -348,4 +348,70 @@ describe('Task model', () => {
       expect(callback.onFound).not.toHaveBeenCalled();
     });
   });
+
+  describe('show', () => {
+    let callback;
+
+    beforeEach(() => {
+      callback = {
+        onNotAllowed: jest.fn(),
+        onFound: jest.fn(),
+        onNotFound: jest.fn(),
+      }
+    });
+
+    it('has the correct behavior when user and task exists', async () => {
+      const token = 'token!';
+      const user = userFactory();
+      const task = taskFactory();
+      const userId = user.id;
+      const taskId = task.id;
+      const fakeToken = {
+        decrypt: jest.fn().mockReturnValue(user),
+      };
+      const fakeUser = {
+        findById: jest.fn().mockReturnValue(user),
+      }
+      const fakeTask = {
+        findById: jest.fn().mockReturnValue(task),
+      };
+      const dependencies = dependenciesMock({
+        services: { Token: fakeToken },
+        repositories: { UserRepository: fakeUser, TaskRepository: fakeTask },
+      });
+
+      await Task.show(token, userId, taskId, callback, dependencies);
+
+      expect(callback.onNotAllowed).not.toHaveBeenCalled();
+      expect(callback.onFound).toHaveBeenCalledWith(task);
+      expect(callback.onNotFound).not.toHaveBeenCalled();
+    });
+
+    it('has the correct behavior when user is not admin and task does not belongs to user', async () => {
+      const token = 'token!';
+      const user = userFactory({ isAdmin: false });
+      const task = taskFactory();
+      const userId = user.id;
+      const taskId = task.id;
+      const fakeToken = {
+        decrypt: jest.fn().mockReturnValue(user),
+      };
+      const fakeUser = {
+        findById: jest.fn().mockReturnValue(user),
+      }
+      const fakeTask = {
+        findById: jest.fn().mockReturnValue(task),
+      };
+      const dependencies = dependenciesMock({
+        services: { Token: fakeToken },
+        repositories: { UserRepository: fakeUser, TaskRepository: fakeTask },
+      });
+
+      await Task.show(token, userId, taskId, callback, dependencies);
+
+      expect(callback.onNotAllowed).toHaveBeenCalled();
+      expect(callback.onFound).not.toHaveBeenCalled();
+      expect(callback.onNotFound).not.toHaveBeenCalled();
+    });
+  });
 });
