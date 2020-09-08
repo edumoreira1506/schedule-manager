@@ -4,7 +4,7 @@ import Pages from '../../services/Pages.js';
 import { ITEMS_PER_PAGE } from '../../config/constants.js';
 import isEmpty from 'lodash/isEmpty.js';
 
-const { Model, DataTypes, where, fn } = Sequelize;
+const { Model, DataTypes } = Sequelize;
 
 export class Task extends Model {
   static init(sequelize) {
