@@ -50,6 +50,18 @@ export default {
     ...getRoute({
       title: 'List users',
       category: 'User',
+      queryParams: [
+        {
+          name: 'page',
+          description: 'Page of query (default is 0)',
+          type: 'integer'
+        },
+        {
+          name: 'keyword',
+          description: 'Key word of query (default is an empty string)',
+          type: 'string'
+        },
+      ]
     })
   },
   '/user/{userId}': {
