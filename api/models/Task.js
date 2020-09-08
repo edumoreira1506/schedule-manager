@@ -23,24 +23,20 @@ export const store = async (task, userId, token, callback, dependencies) => awai
   },
 }, dependencies);
 
+const searchTasks = async (filters, dependencies, callback) => {
+  const { repositories: { TaskRepository } } = dependencies;
+  const tasks = await TaskRepository.search(filters);
+  const pages = await TaskRepository.countPages(filters);
+
+  return callback(tasks, pages);
+};
+
 export const all = async (token, filters, callback, dependencies) => await authenticateAsAdmin(token, {
   ...callback,
-  onAllowed: async () => {
-    const { repositories: { TaskRepository } } = dependencies;
-    const tasks = await TaskRepository.search(filters);
-    const pages = await TaskRepository.countPages(filters);
-
-    return callback.onFound(tasks, pages);
-  }
+  onAllowed: async () => await searchTasks(filters, dependencies, callback.onFound),
 }, dependencies);
 
 export const index = async (token, userId, filters, callback, dependencies) => await show(token, userId, {
   ...callback,
-  onFound: async () => {
-    const { repositories: { TaskRepository } } = dependencies;
-    const tasks = await TaskRepository.search(filters);
-    const pages = await TaskRepository.countPages(filters);
-
-    return callback.onFound(tasks, pages);
-  }
+  onFound: async () => await searchTasks(filters, dependencies, callback.onFound),
 }, dependencies);
