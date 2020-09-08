@@ -55,3 +55,18 @@ export const show = async (token, userId, taskId, callback, dependencies) => awa
     return callback.onFound(task);
   }
 }, dependencies);
+
+export const update = async (newProps, token, userId, taskId, callback, dependencies) => await show(token, userId, taskId, {
+  ...callback,
+  onFound: async task => {
+    const { repositories: { TaskRepository } } = dependencies;
+    const taskDTO = TaskMapper.toDTO(task);
+
+    taskDTO.addProps(newProps);
+
+    return taskDTO.validate({
+      onValidated: async () => await TaskRepository.updateById(taskId, newProps, callback),
+      onInvalidated: callback.onError
+    });
+  }
+}, dependencies);

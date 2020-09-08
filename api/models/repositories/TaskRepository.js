@@ -121,3 +121,9 @@ export const findById = async id => {
   return await repository.findById(id);
 };
 
+export const updateById = async (id, newProps, callback) => {
+  const repository = new Repository({ model: Task });
+
+  return await repository.updateById(id, newProps, callback);
+};
+
