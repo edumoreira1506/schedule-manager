@@ -35,6 +35,8 @@ services:
       - 3000:3000
     depends_on:
       - api
+    environment:
+      REACT_APP_API_URL: http://localhost:3500
 
   database:
     image: postgres
