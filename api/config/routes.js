@@ -15,6 +15,8 @@ routes.get('/user/:id', UserController.show);
 routes.patch('/user/:id', UserController.update);
 routes.delete('/user/:id', UserController.remove);
 
+routes.get('/task', TaskController.all);
+
 routes.post('/user/:userId/task', TaskController.store);
 
 export default routes;

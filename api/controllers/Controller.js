@@ -28,6 +28,12 @@ export default class Controller {
     return bodyParam;
   }
 
+  static getQueryParam(req, param, defaultValue = {}) {
+    const queryParam = req?.query?.[param] ?? defaultValue;
+
+    return queryParam;
+  }
+
   static getParam(req, param, defaultValue = {}) {
     const bodyParam = req?.params?.[param] ?? defaultValue;
 

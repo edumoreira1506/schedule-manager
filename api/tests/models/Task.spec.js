@@ -2,6 +2,7 @@ import dependenciesMock from '../mocks/dependenciesMock.js';
 import * as Task from '../../models/Task.js';
 import taskFactory from '../factories/taskFactory.js';
 import userFactory from '../factories/userFactory.js';
+import { filter } from 'lodash';
 
 describe('Task model', () => {
   describe('store', () => {
@@ -277,6 +278,74 @@ describe('Task model', () => {
       expect(callback.onNotFound).not.toHaveBeenCalled();
       expect(callback.onError).not.toHaveBeenCalled();
       expect(callback.onSaved).toHaveBeenCalledWith(task);
+    });
+  });
+
+  describe('all', () => {
+    let callback;
+
+    beforeEach(() => {
+      callback = {
+        onNotAllowed: jest.fn(),
+        onFound: jest.fn(),
+        onNotFound: jest.fn(),
+      }
+    });
+
+    it('has the correct behavior when user can see all tasks', async () => {
+      const token = 'token!';
+      const user = userFactory();
+      const filters = {};
+      const tasks = [];
+      const pages = 0;
+      const fakeToken = {
+        decrypt: jest.fn().mockReturnValue(user),
+      };
+      const fakeUser = {
+        findById: jest.fn().mockReturnValue(user),
+      };
+      const fakeTask = {
+        search: jest.fn().mockReturnValue(tasks),
+        countPages: jest.fn().mockReturnValue(pages),
+      };
+      const dependencies = dependenciesMock({
+        services: { Token: fakeToken },
+        repositories: { UserRepository: fakeUser, TaskRepository: fakeTask },
+      });
+
+      await Task.all(token, filters, callback, dependencies);
+
+      expect(callback.onNotAllowed).not.toHaveBeenCalled();
+      expect(callback.onNotFound).not.toHaveBeenCalled();
+      expect(callback.onFound).toHaveBeenCalledWith(tasks, pages);
+    });
+
+    it('has the correct behavior when user is not admin', async () => {
+      const token = 'token!';
+      const user = userFactory({ isAdmin: false });
+      const filters = {};
+      const tasks = [];
+      const pages = 0;
+      const fakeToken = {
+        decrypt: jest.fn().mockReturnValue(user),
+      };
+      const fakeUser = {
+        findById: jest.fn().mockReturnValue(user),
+      };
+      const fakeTask = {
+        search: jest.fn().mockReturnValue(tasks),
+        countPages: jest.fn().mockReturnValue(pages),
+      };
+      const dependencies = dependenciesMock({
+        services: { Token: fakeToken },
+        repositories: { UserRepository: fakeUser, TaskRepository: fakeTask },
+      });
+
+      await Task.all(token, filters, callback, dependencies);
+
+      expect(callback.onNotAllowed).toHaveBeenCalled();
+      expect(callback.onNotFound).not.toHaveBeenCalled();
+      expect(callback.onFound).not.toHaveBeenCalled();
     });
   });
 });
