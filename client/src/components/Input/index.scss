@@ -1,0 +1,14 @@
+@import "../../variables.scss";
+
+.Input {
+  padding: 0;
+  border: none;
+  border-radius: $default-radius;
+  height: 100%;
+  width: calc(100% - 10px);
+  padding-left: 10px;
+
+  &:focus {
+    outline: none;
+  }
+}

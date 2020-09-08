@@ -1,0 +1,18 @@
+@import "../../../variables.scss";
+
+.LoginPage {
+  background-color: $light-blue;
+  width: 100%;
+  height: 100vh;
+
+  &__form {
+    width: 80%;
+    background: $blue;
+    padding: 30px 10px;
+    height: auto;
+
+    @media (min-width: $mobile-width) {
+      width: 40%;
+    }
+  }
+}
