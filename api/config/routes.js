@@ -21,5 +21,6 @@ routes.post('/user/:userId/task', TaskController.store);
 routes.get('/user/:userId/task', TaskController.index);
 routes.get('/user/:userId/task/:taskId', TaskController.show);
 routes.patch('/user/:userId/task/:taskId', TaskController.update);
+routes.delete('/user/:userId/task/:taskId', TaskController.remove);
 
 export default routes;

@@ -70,3 +70,12 @@ export const update = async (newProps, token, userId, taskId, callback, dependen
     });
   }
 }, dependencies);
+
+export const remove = async (token, userId, taskId, callback, dependencies) => await show(token, userId, taskId, {
+  ...callback,
+  onFound: async task => {
+    const { repositories: { TaskRepository } } = dependencies;
+
+    return await TaskRepository.deleteById(task.id, callback);
+  }
+}, dependencies);
