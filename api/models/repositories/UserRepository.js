@@ -16,6 +16,10 @@ export class User extends Model {
       sequelize
     });
   }
+
+  static associate(models) {
+    this.hasMany(models.Task, { foreignKey: 'responsible', as: 'tasks' });
+  }
 }
 
 export const save = async user => {
