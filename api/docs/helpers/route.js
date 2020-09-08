@@ -1,3 +1,5 @@
+import { statusCodes } from '../../config/constants.js';
+
 export default ({
   title,
   category,
@@ -36,5 +38,25 @@ export default ({
         }
       })),
     ].filter(Boolean),
+    responses: {
+      [statusCodes.ERROR]: {
+        description: 'Error'
+      },
+      [statusCodes.CREATED]: {
+        description: 'Created',
+      },
+      [statusCodes.NOT_ALLOWED]: {
+        description: 'Not allowed',
+      },
+      [statusCodes.OK]: {
+        description: 'OK',
+      },
+      [statusCodes.NOT_FOUND]: {
+        description: 'Not found',
+      },
+      [statusCodes.UPDATED]: {
+        description: 'Updated',
+      },
+    }
   },
 });
