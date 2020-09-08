@@ -1,6 +1,7 @@
 import express from 'express';
 import HomeController from '../controllers/HomeController.js';
 import UserController from '../controllers/UserController.js';
+import TaskController from '../controllers/TaskController.js';
 
 const routes = express.Router();
 
@@ -13,5 +14,7 @@ routes.get('/user', UserController.index);
 routes.get('/user/:id', UserController.show);
 routes.patch('/user/:id', UserController.update);
 routes.delete('/user/:id', UserController.remove);
+
+routes.post('/user/:userId/task', TaskController.store);
 
 export default routes;
