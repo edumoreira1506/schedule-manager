@@ -33,3 +33,14 @@ export const all = async (token, filters, callback, dependencies) => await authe
     return callback.onFound(tasks, pages);
   }
 }, dependencies);
+
+export const index = async (token, userId, filters, callback, dependencies) => await show(token, userId, {
+  ...callback,
+  onFound: async () => {
+    const { repositories: { TaskRepository } } = dependencies;
+    const tasks = await TaskRepository.search(filters);
+    const pages = await TaskRepository.countPages(filters);
+
+    return callback.onFound(tasks, pages);
+  }
+}, dependencies);
