@@ -12,3 +12,5 @@ export const getToken = () => getLocalStorageItem(TOKEN_KEY);
 export const setUser = (user) => setLocalStorageItem(USER_KEY, JSON.stringify(user));
 
 export const setToken = (token) => setLocalStorageItem(TOKEN_KEY, token);
+
+export const clear = () => window.localStorage.clear();

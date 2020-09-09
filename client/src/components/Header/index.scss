@@ -1,0 +1,82 @@
+@import "../../variables.scss";
+
+.Header {
+  width: 100%;
+  height: 100%;
+
+  &__menu {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    right: 100%;
+    transition: $default-transition;
+
+    &--opened {
+      right: 0;
+    }
+  }
+
+  &__wrapper {
+    width: 90%;
+    height: 90%;
+  }
+
+  &__title {
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 0.8em;
+  }
+
+  &__turn-off-icon {
+    width: 70%;
+
+    &-wrapper {
+      width: 30px;
+      margin: 0;
+      cursor: pointer;
+    }
+  }
+
+  &__menu-icon {
+    width: 30px;
+    height: 3px;
+    background-color: $dark-blue;
+    border-radius: $default-radius;
+    margin-right: 5px;
+    position: relative;
+    cursor: pointer;
+    transition: $default-transition;
+    z-index: $z-index-4;
+
+    &::after, &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: $dark-blue;
+      border-radius: $default-radius;
+    }
+
+    &::after {
+      top: -8px;
+    }
+
+    &::before {
+      top: 8px;
+    }
+
+    &--opened {
+      transform: rotate(45deg);
+  
+      &::before {
+        display: none;
+      }
+  
+      &::after {
+        transform: rotate(90deg);
+        top: 0;
+      }
+    }
+  }
+}

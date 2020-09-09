@@ -1,0 +1,40 @@
+@import "../../variables.scss";
+
+.Menu {
+  height: 100%;
+  width: 75%;
+  background-color: $light-grey;
+  box-shadow: $default-box-shadow;
+
+  &__header {
+    width: 100%;
+    height: 10%;
+    background-color: $blue;
+
+    &-text {
+      margin-right: 15px;
+    }
+  }
+
+  &__links {
+    list-style: none;
+    padding: 25px 0;
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  &__item {
+    transition: $default-transition;
+    padding: 10px 0;
+    border-bottom: 1px solid $border-color;
+
+    &:hover {
+      transform: translateX(10px);
+    }
+  }
+
+  &__link {
+    text-decoration: none;
+    color: $black;
+  }
+}

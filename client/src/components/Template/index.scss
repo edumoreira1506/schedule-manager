@@ -1,0 +1,12 @@
+@import "../../variables.scss";
+
+.Template {
+  background-color: $light-grey;
+  min-height: 100vh;
+
+  &__header {
+    height: 10vh;
+    width: 100%;
+    background-color: $blue;
+  }
+}
