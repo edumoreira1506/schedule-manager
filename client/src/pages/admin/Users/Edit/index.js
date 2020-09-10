@@ -39,7 +39,13 @@ const AdminUsersEdit = () => {
     <div className="AdminUsersEdit Flex Flex--vertical-alignment Flex--justify-center Flex--align-center">
       <p className="AdminUsersEdit__title">{t('links:editUser')}</p>
       <div className="AdminUsersEdit__form">
-        {user && (<UserForm user={user} onSubmit={handleUpdateUser} />)}
+        {user && (
+          <UserForm
+            user={user}
+            hide={{ password: true, confirmPassword: true }}
+            onSubmit={handleUpdateUser}
+          />
+        )}
       </div>
     </div>
   );

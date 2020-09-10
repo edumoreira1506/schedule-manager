@@ -5,7 +5,7 @@ import Form from '../../Form';
 
 import './index.scss';
 
-const UserForm = ({ onSubmit, user }) => {
+const UserForm = ({ onSubmit, user, hide }) => {
   const { t } = useTranslation(['user', 'common']);
   const [name, setName] = useState(user.name || '');
   const [email, setEmail] = useState(user.email || '');
@@ -27,30 +27,35 @@ const UserForm = ({ onSubmit, user }) => {
       placeholder: t('user:name'),
       type: 'text',
       onChange: setName,
+      hide: hide.name,
     },
     {
       value: email,
       placeholder: t('user:email'),
       type: 'email',
       onChange: setEmail,
+      hide: hide.email,
     },
     {
       value: password,
       placeholder: t('user:password'),
       type: 'password',
       onChange: setPassword,
+      hide: hide.password,
     },
     {
       value: confirmPassword,
       placeholder: t('user:confirmPassword'),
       type: 'password',
       onChange: setConfirmPassword,
+      hide: hide.confirmPassword,
     },
     {
       value: isAdmin,
       placeholder: t('user:isAdmin'),
       type: 'radio',
       onChange: toggleIsAdmin,
+      hide: hide.isAdmin,
     },
   ];
 
@@ -68,10 +73,26 @@ UserForm.propTypes = {
       isAdmin: PropTypes.bool.isRequired,
     }),
   ),
+  hide: PropTypes.objectOf(
+    PropTypes.shape({
+      name: PropTypes.bool,
+      email: PropTypes.bool,
+      password: PropTypes.bool,
+      confirmPassword: PropTypes.bool,
+      isAdmin: PropTypes.bool,
+    }),
+  ),
 };
 
 UserForm.defaultProps = {
   user: {},
+  hide: {
+    name: false,
+    email: false,
+    password: false,
+    confirmPassword: false,
+    isAdmin: false,
+  },
 };
 
 export default UserForm;
