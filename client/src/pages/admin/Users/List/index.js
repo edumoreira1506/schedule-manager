@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { FaEdit, FaTrashAlt, FaLock } from 'react-icons/fa';
 import useApi from '../../../../hooks/useApi';
 import useService from '../../../../hooks/useService';
 import { index, remove } from '../../../../models/user';
@@ -78,9 +79,15 @@ const AdminUsersList = () => {
               <td>{user.isAdmin ? t('common:yes') : t('common:no')}</td>
               <td>{user.name}</td>
               <td>
-                <Button onClick={() => handleRemoveUser(user)} type="button">{t('common:delete')}</Button>
-                <Button onClick={() => handleNavigateToEditPage(user)} type="button">{t('common:edit')}</Button>
-                <Button onClick={() => handleNavigateToEditPasswordPage(user)} type="button">{t('common:editPassword')}</Button>
+                <div className="AdminUsersList__table-action">
+                  <Button title={t('common:delete')} onClick={() => handleRemoveUser(user)} type="button"><FaTrashAlt /></Button>
+                </div>
+                <div className="AdminUsersList__table-action">
+                  <Button title={t('common:edit')} onClick={() => handleNavigateToEditPage(user)} type="button"><FaEdit /></Button>
+                </div>
+                <div className="AdminUsersList__table-action">
+                  <Button title={t('common:editPassword')} onClick={() => handleNavigateToEditPasswordPage(user)} type="button"><FaLock /></Button>
+                </div>
               </td>
             </tr>
           ))}
