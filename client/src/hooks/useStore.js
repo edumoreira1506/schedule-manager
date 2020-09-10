@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { AdminContext } from '../containers/Admin';
+import { UserContext } from '../containers/User';
 
-const useAdminStore = (selector) => {
-  const [state, setState] = useContext(AdminContext);
+const useStore = (selector) => {
+  const [state, setState] = useContext(UserContext);
   const selectedState = state[selector];
   const onChangePropsFromSelectedState = (newProps) => {
     setState((prevState) => ({
@@ -17,4 +17,4 @@ const useAdminStore = (selector) => {
   return [selectedState, onChangePropsFromSelectedState];
 };
 
-export default useAdminStore;
+export default useStore;

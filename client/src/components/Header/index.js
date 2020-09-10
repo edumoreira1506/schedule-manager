@@ -7,14 +7,14 @@ import { useHistory } from 'react-router-dom';
 import turnOffIcon from '../../assets/images/icons/turn-off.svg';
 import * as LocalStorage from '../../services/LocalStorage';
 import Menu from '../Menu';
-import useAdminStore from '../../hooks/useAdminStore';
+import useStore from '../../hooks/useStore';
 
 import './index.scss';
 
 const Header = () => {
   const { t } = useTranslation('common');
   const [showMenu, setShowMenu] = useState(false);
-  const [user] = useAdminStore('user');
+  const [user] = useStore('user');
   const history = useHistory();
 
   const toggleMenu = () => setShowMenu(!showMenu);

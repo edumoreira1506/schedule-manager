@@ -6,9 +6,9 @@ const INITIAL_STATE = {
   user: {},
 };
 
-export const AdminContext = createContext();
+export const UserContext = createContext();
 
-const AdminContainer = ({ children }) => {
+const UserContainer = ({ children }) => {
   const [state, setState] = useState(INITIAL_STATE);
 
   useEffect(() => {
@@ -18,14 +18,14 @@ const AdminContainer = ({ children }) => {
   }, []);
 
   return (
-    <AdminContext.Provider value={[state, setState]}>
+    <UserContext.Provider value={[state, setState]}>
       {children}
-    </AdminContext.Provider>
+    </UserContext.Provider>
   );
 };
 
-AdminContainer.propTypes = {
+UserContainer.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default AdminContainer;
+export default UserContainer;

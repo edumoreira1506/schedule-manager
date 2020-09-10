@@ -2,6 +2,11 @@ export const publicRoutes = {
   LOGIN: '/login',
 };
 
+export const privateRoutes = {
+  EDIT_PROFILE: '/edit_profile',
+  EDIT_PASSWORD: '/edit_password',
+};
+
 export const adminRoutes = {
   HOME: '/admin/home',
   USERS: '/admin/users',

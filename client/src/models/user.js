@@ -1,5 +1,5 @@
 import { getUser } from '../services/LocalStorage';
-import { adminRoutes, userRoutes } from '../config/constants';
+import { adminRoutes, userRoutes, privateRoutes } from '../config/constants';
 
 export const isAuthenticated = () => Boolean(getUser());
 
@@ -41,6 +41,17 @@ export const show = async (userId, callback, userService) => {
   return apiReponse.ok ? callback.onSuccess(apiReponse.user) : callback.onError(apiReponse.errors.join(' '));
 };
 
+const sharedRoutes = [
+  {
+    href: privateRoutes.EDIT_PROFILE,
+    i18nKey: 'editProfile',
+  },
+  {
+    href: privateRoutes.EDIT_PASSWORD,
+    i18nKey: 'editPassword',
+  },
+];
+
 export const getMenuLinks = (user) => (user.isAdmin ? [
   {
     href: adminRoutes.HOME,
@@ -54,9 +65,11 @@ export const getMenuLinks = (user) => (user.isAdmin ? [
     href: adminRoutes.NEW_USER,
     i18nKey: 'newUser',
   },
+  ...sharedRoutes,
 ] : [
   {
     href: userRoutes.HOME,
     i18nKey: 'home',
   },
+  ...sharedRoutes,
 ]);
