@@ -2,6 +2,10 @@ export const publicRoutes = {
   LOGIN: '/login',
 };
 
+export const privateRoutes = {
+  EDIT_PROFILE: '/edit_profile',
+};
+
 export const adminRoutes = {
   HOME: '/admin/home',
   USERS: '/admin/users',

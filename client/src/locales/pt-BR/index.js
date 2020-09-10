@@ -21,6 +21,7 @@ export default {
     newUser: 'Novo usuário',
     editUser: 'Editar usuário',
     editUserPassword: 'Editar senha',
+    editProfile: 'Editar perfil',
   },
   user: {
     email: 'E-mail',
