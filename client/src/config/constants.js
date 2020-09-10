@@ -13,6 +13,7 @@ export const adminRoutes = {
   NEW_USER: '/admin/users/new',
   EDIT_USER: (id) => `/admin/users/${id}/edit`,
   EDIT_PASSWORD: (id) => `/admin/users/${id}/edit_password`,
+  TASKS: '/admin/tasks',
 };
 
 export const userRoutes = {
