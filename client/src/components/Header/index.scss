@@ -5,7 +5,7 @@
   height: 100%;
 
   &__menu {
-    position: absolute;
+    position: fixed;
     width: 100vw;
     height: 100vh;
     top: 0;
@@ -15,17 +15,30 @@
     &--opened {
       right: 0;
     }
+
+    @media (min-width: $mobile-width) {
+      left: 0;
+      width: 28%;
+    }
   }
 
   &__wrapper {
     width: 90%;
     height: 90%;
+
+    @media (min-width: $mobile-width) {
+      justify-content: space-between !important;
+    }
   }
 
   &__title {
     margin: 0;
     text-transform: uppercase;
     font-size: 0.8em;
+
+    @media (min-width: $mobile-width) {
+      font-size: 2em;
+    }
   }
 
   &__turn-off-icon {
@@ -77,6 +90,10 @@
         transform: rotate(90deg);
         top: 0;
       }
+    }
+
+    @media (min-width: $mobile-width) {
+      display: none;
     }
   }
 }

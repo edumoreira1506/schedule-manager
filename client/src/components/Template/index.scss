@@ -8,5 +8,17 @@
     height: 10vh;
     width: 100%;
     background-color: $blue;
+
+    @media (min-width: $mobile-width) {
+      width: 80%;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+
+  @media (min-width: $mobile-width) {
+    padding-top: 10vh;
+    padding-left: 24%;
   }
 }
