@@ -5,11 +5,15 @@
   height: auto;
 
   &__title {
-    margin: 2em 0 1em 0;
+    margin: 0.7em 0 1em 0;
     font-size: 1.5em;
     width: 96%;
     border-bottom: solid 1px $border-color;
     padding-bottom: 10px;
+
+    @media (min-width: $mobile-width) {
+      margin: 2em 0 1em 0;
+    };
   }
 
   &__search {
@@ -20,6 +24,16 @@
 
   &__table {
     width: 98%;
+    table-layout:fixed;
+
+    tr {
+      height:1em;
+    }
+
+    td {
+      overflow:hidden;
+      white-space:nowrap;
+    } 
 
     th {
       padding: 15px 0;
@@ -37,7 +51,11 @@
   }
 
   &__dower {
-    width: 4%;
+    width: 15%;
+
+    @media (min-width: $mobile-width) {
+      width: 4%;
+    }
   }
 
   &__arrow {
