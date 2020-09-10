@@ -20,7 +20,13 @@ export const index = async (keyWord, page, callback, userService) => {
 export const remove = async (userId, callback, userService) => {
   const apiReponse = await userService.remove(userId);
 
-  return apiReponse.ok ? callback.onSuccess() : callback.onError(apiReponse.errors.join(' ')); 
+  return apiReponse.ok ? callback.onSuccess() : callback.onError(apiReponse.errors.join(' '));
+};
+
+export const register = async (user, callback, userService) => {
+  const apiReponse = await userService.register(user);
+
+  return apiReponse.ok ? callback.onSuccess() : callback.onError(apiReponse.errors.join(' '));
 };
 
 export const getMenuLinks = (user) => (user.isAdmin ? [
@@ -31,6 +37,10 @@ export const getMenuLinks = (user) => (user.isAdmin ? [
   {
     href: adminRoutes.USERS,
     i18nKey: 'listUsers',
+  },
+  {
+    href: adminRoutes.NEW_USER,
+    i18nKey: 'newUser',
   },
 ] : [
   {

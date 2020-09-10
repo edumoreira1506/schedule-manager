@@ -43,4 +43,19 @@ export const remove = async (userId) => {
       errors,
     };
   }
-}
+};
+
+export const register = async (user) => {
+  try {
+    const { data } = await RootAPI.post('/user', user);
+
+    return data;
+  } catch (error) {
+    const errors = error?.response?.data?.errors ?? [];
+
+    return {
+      ok: false,
+      errors,
+    };
+  }
+};

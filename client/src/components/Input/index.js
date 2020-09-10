@@ -7,7 +7,17 @@ const Input = ({
   value,
   type,
   placeholder,
-}) => (
+}) => (type === 'radio' ? (
+  <div className="InputWrapper Flex Flex--justify-center Flex--align-center">
+    <label className="Input__label">{placeholder}</label>
+    <input
+      className="Input"
+      type={type}
+      checked={value}
+      onClick={onChange}
+    />
+  </div>
+) : (
   <input
     className="Input"
     type={type}
@@ -15,7 +25,7 @@ const Input = ({
     onChange={(e) => onChange(e.target.value)}
     placeholder={placeholder}
   />
-);
+));
 
 Input.propTypes = {
   onChange: PropTypes.func.isRequired,

@@ -5,6 +5,7 @@ export const publicRoutes = {
 export const adminRoutes = {
   HOME: '/admin/home',
   USERS: '/admin/users',
+  NEW_USER: '/admin/users/new',
 };
 
 export const userRoutes = {
