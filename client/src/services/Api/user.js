@@ -98,4 +98,4 @@ export const show = async (userId) => {
       errors,
     };
   }
-}
+};

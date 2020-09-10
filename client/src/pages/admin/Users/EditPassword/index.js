@@ -17,11 +17,10 @@ const AdminUsersEditPassword = () => {
   const handleUpdateUser = ({ password, confirmPassword }) => update(userId,
     { password, confirmPassword },
     {
-      onSuccess: () => window.alert(t('common:edited')),
+      onSuccess: () => customAlerts.success(t('common:edited')),
       onError: customAlerts.error,
     },
-    userAPI,
-  );
+    userAPI);
 
   return (
     <div className="AdminUsersEditPassword Flex Flex--vertical-alignment Flex--justify-center Flex--align-center">

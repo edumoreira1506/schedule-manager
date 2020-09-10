@@ -29,7 +29,7 @@ const AdminUsersEdit = () => {
   const handleUpdateUser = ({ email, name, isAdmin }) => update(userId, {
     email, name, isAdmin,
   }, {
-    onSuccess: () => window.alert(t('common:edited')),
+    onSuccess: () => () => customAlerts.success(t('common:edited')),
     onError: customAlerts.error,
   }, userAPI);
 

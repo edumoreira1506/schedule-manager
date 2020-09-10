@@ -18,7 +18,7 @@ const Form = ({ onSubmit, inputs, buttonText }) => (
       </div>
     )))}
     <div className="Form__submit-button">
-      <Button onClick={onSubmit}>
+      <Button onClick={onSubmit} type="submit">
         {buttonText}
       </Button>
     </div>

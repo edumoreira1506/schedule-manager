@@ -35,13 +35,14 @@ const AdminUsersList = () => {
   }, [keyWord, page, userAPI, customAlerts.error]);
 
   const handleRemoveUser = (user) => {
+    // eslint-disable-next-line no-alert
     const confirmDelete = window.confirm(t('common:confirmDelete'));
 
     if (confirmDelete) {
       remove(user.id, {
         onSuccess: () => {
-          setUsers((oldUsers) => oldUsers.filter(u => u.id !== user.id));
-          window.alert(t('common:deleted'));
+          setUsers((oldUsers) => oldUsers.filter((u) => u.id !== user.id));
+          customAlerts.success(t('common:deleted'));
         },
         onError: customAlerts.error,
       }, userAPI);
@@ -49,7 +50,9 @@ const AdminUsersList = () => {
   };
 
   const handleNavigateToEditPage = (user) => history.push(adminRoutes.EDIT_USER(user.id));
-  const handleNavigateToEditPasswordPage = user => history.push(adminRoutes.EDIT_PASSWORD(user.id));
+  const handleNavigateToEditPasswordPage = (user) => history.push(
+    adminRoutes.EDIT_PASSWORD(user.id),
+  );
 
   return (
     <div className="AdminUsersList Flex Flex--justify-center Flex--align-center Flex--vertical-alignment">

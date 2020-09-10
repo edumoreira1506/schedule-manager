@@ -18,7 +18,13 @@ const UserForm = ({ onSubmit, user, hide }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    return onSubmit({ name, email, password, confirmPassword, isAdmin });
+    return onSubmit({
+      name,
+      email,
+      password,
+      confirmPassword,
+      isAdmin,
+    });
   };
 
   const inputs = [

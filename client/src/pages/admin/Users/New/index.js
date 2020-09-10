@@ -13,7 +13,7 @@ const AdminUsersNew = () => {
   const customAlerts = useService('Alert');
 
   const handleRegisterUser = (user) => register(user, {
-    onSuccess: () => window.alert(t('common:saved')),
+    onSuccess: () => customAlerts.success(t('common:saved')),
     onError: customAlerts.error,
   }, userAPI);
 
