@@ -11,11 +11,14 @@ export default {
     deleted: 'Dado excluído com sucesso.',
     save: 'Salvar',
     saved: 'Dado salvo com sucesso',
+    edited: 'Dado editado com sucesso',
+    edit: 'Editar',
   },
   links: {
     home: 'Página inicial',
     listUsers: 'Listagem de usuários',
     newUser: 'Novo usuário',
+    editUser: 'Editar usuário',
   },
   user: {
     email: 'E-mail',

@@ -5,13 +5,13 @@ import Form from '../../Form';
 
 import './index.scss';
 
-const UserForm = ({ onSubmit }) => {
+const UserForm = ({ onSubmit, user }) => {
   const { t } = useTranslation(['user', 'common']);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState(user.name || '');
+  const [email, setEmail] = useState(user.email || '');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(user.isAdmin || false);
 
   const toggleIsAdmin = () => setIsAdmin(!isAdmin);
 
@@ -61,6 +61,17 @@ const UserForm = ({ onSubmit }) => {
 
 UserForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  user: PropTypes.objectOf(
+    PropTypes.shape({
+      email: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      isAdmin: PropTypes.bool.isRequired,
+    }),
+  ),
+};
+
+UserForm.defaultProps = {
+  user: {},
 };
 
 export default UserForm;

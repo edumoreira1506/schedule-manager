@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import useApi from '../../../../hooks/useApi';
 import useService from '../../../../hooks/useService';
 import { index, remove } from '../../../../models/user';
 import Input from '../../../../components/Input';
+import { adminRoutes } from '../../../../config/constants';
+import Button from '../../../../components/Button';
 
 import './index.scss';
-import Button from '../../../../components/Button';
 
 const AdminUsersList = () => {
   const [keyWord, setKeyWord] = useState('');
@@ -16,6 +18,7 @@ const AdminUsersList = () => {
   const { t } = useTranslation(['user', 'common', 'users']);
   const userAPI = useApi('user');
   const customAlerts = useService('Alert');
+  const history = useHistory();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -45,6 +48,8 @@ const AdminUsersList = () => {
     }
   };
 
+  const handleNavigateToEditPage = (user) => history.push(adminRoutes.EDIT_USER(user.id));
+
   return (
     <div className="AdminUsersList Flex Flex--justify-center Flex--align-center Flex--vertical-alignment">
       <p className="AdminUsersList__title">{t('users:other')}</p>
@@ -70,6 +75,7 @@ const AdminUsersList = () => {
               <td>{user.name}</td>
               <td>
                 <Button onClick={() => handleRemoveUser(user)} type="button">{t('common:delete')}</Button>
+                <Button onClick={() => handleNavigateToEditPage(user)} type="button">{t('common:edit')}</Button>
               </td>
             </tr>
           ))}

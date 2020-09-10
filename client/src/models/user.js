@@ -29,6 +29,18 @@ export const register = async (user, callback, userService) => {
   return apiReponse.ok ? callback.onSuccess() : callback.onError(apiReponse.errors.join(' '));
 };
 
+export const update = async (userId, user, callback, userService) => {
+  const apiReponse = await userService.update(userId, user);
+
+  return apiReponse.ok ? callback.onSuccess() : callback.onError(apiReponse.errors.join(' '));
+};
+
+export const show = async (userId, callback, userService) => {
+  const apiReponse = await userService.show(userId);
+
+  return apiReponse.ok ? callback.onSuccess(apiReponse.user) : callback.onError(apiReponse.errors.join(' '));
+};
+
 export const getMenuLinks = (user) => (user.isAdmin ? [
   {
     href: adminRoutes.HOME,
