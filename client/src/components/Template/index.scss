@@ -1,0 +1,26 @@
+@import "../../variables.scss";
+
+.Template {
+  background-color: $light-grey;
+  min-height: 100vh;
+
+  &__header {
+    height: 10vh;
+    width: 100%;
+    background-color: $blue;
+
+    @media (min-width: $mobile-width) {
+      width: 80%;
+      position: fixed;
+      right: 0;
+      top: 0;
+    }
+  }
+
+  @media (min-width: $mobile-width) {
+    &__body {
+      padding-top: 10vh;
+      padding-left: 24%;
+    }
+  }
+}

@@ -4,7 +4,6 @@ import services from '../services/index.js';
 import i18next from 'i18next';
 
 export default class Controller {
-  // eslint-disable-next-line
   static dependencies = {
     repositories,
     services,

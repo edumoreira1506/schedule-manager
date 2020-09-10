@@ -3,6 +3,10 @@ body {
   margin: 0;
 }
 
+* {
+  font-family: Helvetica;
+}
+
 .Flex {
   display: flex;
 }
@@ -17,6 +21,10 @@ body {
 
 .Flex--justify-between {
   justify-content: space-between;
+}
+
+.Flex--justify-around {
+  justify-content: space-around;
 }
 
 .Flex--justify-end {

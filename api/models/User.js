@@ -115,7 +115,7 @@ export const update = async (token, newProps, userId, callback, dependencies) =>
       onValidated: async () => {
         userDTO.encryptPassword(dependencies);
 
-        return await UserRepository.updateById(userId, newProps, callback);
+        return await UserRepository.updateById(userId, userDTO, callback);
       }
     });
   }, 

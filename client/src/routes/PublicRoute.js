@@ -17,7 +17,7 @@ const PublicRoute = ({ component: Component, ...rest }) => {
 };
 
 PublicRoute.propTypes = {
-  component: PropTypes.node.isRequired,
+  component: PropTypes.func.isRequired,
 };
 
 export default PublicRoute;

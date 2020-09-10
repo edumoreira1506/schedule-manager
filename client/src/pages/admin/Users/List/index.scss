@@ -1,0 +1,70 @@
+@import "../../../../variables.scss";
+
+.AdminUsersList {
+  width: 100%;
+  height: auto;
+
+  &__title {
+    margin: 0.7em 0 1em 0;
+    font-size: 1.5em;
+    width: 96%;
+    border-bottom: solid 1px $border-color;
+    padding-bottom: 10px;
+
+    @media (min-width: $mobile-width) {
+      margin: 2em 0 1em 0;
+    };
+  }
+
+  &__search {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 20px;
+  }
+
+  &__table {
+    width: 98%;
+    table-layout:fixed;
+
+    tr {
+      height:1em;
+    }
+
+    td {
+      overflow:hidden;
+      white-space:nowrap;
+    } 
+
+    th {
+      padding: 15px 0;
+      text-align: left;
+
+      &:first-child {
+        text-align: center;
+      }
+    }
+
+    &-header {
+      background-color: $black;
+      color: $light-grey;
+    }
+
+    &-action {
+      display: inline-block;
+      width: 25px;
+    }
+  }
+
+  &__dower {
+    width: 15%;
+
+    @media (min-width: $mobile-width) {
+      width: 4%;
+    }
+  }
+
+  &__arrow {
+    width: 48%;
+    margin-top: 20px;
+  }
+}

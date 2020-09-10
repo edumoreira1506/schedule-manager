@@ -6,7 +6,7 @@ import './index.scss';
 
 const Form = ({ onSubmit, inputs, buttonText }) => (
   <form className="Form Flex Flex--justify-center Flex--align-center Flex--vertical-alignment" onSubmit={onSubmit}>
-    {inputs.map((input) => (
+    {inputs.map((input) => (input.hide ? null : (
       <div className="Form__area" key={input.placeholder}>
         <Input
           className="Form__input"
@@ -16,9 +16,9 @@ const Form = ({ onSubmit, inputs, buttonText }) => (
           placeholder={input.placeholder}
         />
       </div>
-    ))}
+    )))}
     <div className="Form__submit-button">
-      <Button onClick={onSubmit}>
+      <Button onClick={onSubmit} type="submit">
         {buttonText}
       </Button>
     </div>
@@ -28,10 +28,11 @@ const Form = ({ onSubmit, inputs, buttonText }) => (
 Form.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   inputs: PropTypes.arrayOf(PropTypes.shape({
-    value: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     placeholder: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
+    hide: PropTypes.bool,
   })),
   buttonText: PropTypes.string.isRequired,
 };
