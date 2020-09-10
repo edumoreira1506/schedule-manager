@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import Form from '../../Form';
-
-import './index.scss';
+import Form from '../Form';
 
 const UserForm = ({ onSubmit, user, hide }) => {
   const { t } = useTranslation(['user', 'common']);
