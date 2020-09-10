@@ -8,8 +8,12 @@ const api = axios.create({
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH',
-    Authorization: getToken(),
   },
 });
+
+// eslint-disable-next-line func-names
+api.setToken = function () {
+  this.defaults.headers.common.Authorization = getToken();
+};
 
 export default api;

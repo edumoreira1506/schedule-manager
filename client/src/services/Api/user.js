@@ -17,6 +17,8 @@ export const login = async (email, password) => {
 
 export const index = async (keyWord, page) => {
   try {
+    RootAPI.setToken();
+
     const { data } = await RootAPI.get(`/user?keyword=${keyWord}&page=${page}`);
 
     return data;
@@ -32,6 +34,8 @@ export const index = async (keyWord, page) => {
 
 export const remove = async (userId) => {
   try {
+    RootAPI.setToken();
+
     const { data } = await RootAPI.delete(`/user/${userId}`);
 
     return data;
@@ -47,6 +51,8 @@ export const remove = async (userId) => {
 
 export const register = async (user) => {
   try {
+    RootAPI.setToken();
+
     const { data } = await RootAPI.post('/user', user);
 
     return data;
@@ -62,6 +68,8 @@ export const register = async (user) => {
 
 export const update = async (userId, user) => {
   try {
+    RootAPI.setToken();
+
     const { data } = await RootAPI.patch(`/user/${userId}`, user);
 
     return data;
@@ -77,6 +85,8 @@ export const update = async (userId, user) => {
 
 export const show = async (userId) => {
   try {
+    RootAPI.setToken();
+
     const { data } = await RootAPI.get(`/user/${userId}`);
 
     return data;
