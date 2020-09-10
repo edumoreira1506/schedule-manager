@@ -16,7 +16,7 @@ const Menu = ({ user }) => {
       </div>
       <ul className="Menu__links">
         {getMenuLinks(user).map((link) => (
-          <li className="Menu__item">
+          <li key={link.href} className="Menu__item">
             <Link to={link.href} className="Menu__link">
               {t(`links:${link.i18nKey}`)}
             </Link>

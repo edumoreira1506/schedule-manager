@@ -3,9 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import UserForm from '../../../../components/Forms/UserForm';
 import useApi from '../../../../hooks/useApi';
-import { update } from '../../../../models/user';
+import { update, show } from '../../../../models/user';
 import useService from '../../../../hooks/useService';
-import { show } from '../../../../models/user';
 
 import './index.scss';
 
@@ -25,11 +24,10 @@ const AdminUsersEdit = () => {
     };
 
     fetchUser();
-  }, [userId]);
+  }, [userId, customAlerts, userAPI]);
 
-  const handleUpdateUser = ({ password, confirmPassword, ...user }) => update(userId, {
-    ...user,
-    ...(password ? ({ password, confirmPassword }) : {}),
+  const handleUpdateUser = ({ email, name, isAdmin }) => update(userId, {
+    email, name, isAdmin,
   }, {
     onSuccess: () => window.alert(t('common:edited')),
     onError: customAlerts.error,

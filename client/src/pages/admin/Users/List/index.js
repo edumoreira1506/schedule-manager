@@ -49,6 +49,7 @@ const AdminUsersList = () => {
   };
 
   const handleNavigateToEditPage = (user) => history.push(adminRoutes.EDIT_USER(user.id));
+  const handleNavigateToEditPasswordPage = user => history.push(adminRoutes.EDIT_PASSWORD(user.id));
 
   return (
     <div className="AdminUsersList Flex Flex--justify-center Flex--align-center Flex--vertical-alignment">
@@ -76,6 +77,7 @@ const AdminUsersList = () => {
               <td>
                 <Button onClick={() => handleRemoveUser(user)} type="button">{t('common:delete')}</Button>
                 <Button onClick={() => handleNavigateToEditPage(user)} type="button">{t('common:edit')}</Button>
+                <Button onClick={() => handleNavigateToEditPasswordPage(user)} type="button">{t('common:editPassword')}</Button>
               </td>
             </tr>
           ))}
