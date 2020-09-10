@@ -4,6 +4,7 @@ export const publicRoutes = {
 
 export const privateRoutes = {
   EDIT_PROFILE: '/edit_profile',
+  EDIT_PASSWORD: '/edit_password',
 };
 
 export const adminRoutes = {

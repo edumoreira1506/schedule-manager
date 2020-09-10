@@ -46,6 +46,10 @@ const sharedRoutes = [
     href: privateRoutes.EDIT_PROFILE,
     i18nKey: 'editProfile',
   },
+  {
+    href: privateRoutes.EDIT_PASSWORD,
+    i18nKey: 'editPassword',
+  },
 ];
 
 export const getMenuLinks = (user) => (user.isAdmin ? [

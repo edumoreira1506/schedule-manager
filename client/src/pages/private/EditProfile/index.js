@@ -8,7 +8,7 @@ import useStore from '../../../hooks/useStore';
 
 import './index.scss';
 
-const AdminUsersEdit = () => {
+const EditProfile = () => {
   const [user, setUser] = useStore('user');
   const { t } = useTranslation(['links', 'common']);
   const userAPI = useApi('user');
@@ -29,9 +29,9 @@ const AdminUsersEdit = () => {
   }, userAPI);
 
   return (
-    <div className="AdminUsersEdit Flex Flex--vertical-alignment Flex--justify-center Flex--align-center">
-      <p className="AdminUsersEdit__title">{t('links:editProfile')}</p>
-      <div className="AdminUsersEdit__form">
+    <div className="EditProfile Flex Flex--vertical-alignment Flex--justify-center Flex--align-center">
+      <p className="EditProfile__title">{t('links:editProfile')}</p>
+      <div className="EditProfile__form">
         {Object.values(user).length > 0 && (
           <UserForm
             user={user}
@@ -44,4 +44,4 @@ const AdminUsersEdit = () => {
   );
 };
 
-export default AdminUsersEdit;
+export default EditProfile;
