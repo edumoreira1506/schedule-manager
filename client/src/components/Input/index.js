@@ -15,6 +15,7 @@ const Input = ({
       type={type}
       checked={value}
       onClick={onChange}
+      onChange={onChange}
     />
   </div>
 ) : (
@@ -29,7 +30,7 @@ const Input = ({
 
 Input.propTypes = {
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   type: PropTypes.node.isRequired,
   placeholder: PropTypes.string.isRequired,
 };

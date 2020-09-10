@@ -69,7 +69,7 @@ const AdminUsersList = () => {
         </thead>
         <tbody>
           {users.map((user) => (
-            <tr>
+            <tr key={user.id}>
               <th scope="row">{user.id}</th>
               <td>{user.email}</td>
               <td>{user.isAdmin ? t('common:yes') : t('common:no')}</td>

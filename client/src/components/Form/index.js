@@ -28,7 +28,7 @@ const Form = ({ onSubmit, inputs, buttonText }) => (
 Form.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   inputs: PropTypes.arrayOf(PropTypes.shape({
-    value: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     placeholder: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,

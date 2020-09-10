@@ -66,22 +66,18 @@ const UserForm = ({ onSubmit, user, hide }) => {
 
 UserForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  user: PropTypes.objectOf(
-    PropTypes.shape({
-      email: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      isAdmin: PropTypes.bool.isRequired,
-    }),
-  ),
-  hide: PropTypes.objectOf(
-    PropTypes.shape({
-      name: PropTypes.bool,
-      email: PropTypes.bool,
-      password: PropTypes.bool,
-      confirmPassword: PropTypes.bool,
-      isAdmin: PropTypes.bool,
-    }),
-  ),
+  user: PropTypes.shape({
+    email: PropTypes.string,
+    name: PropTypes.string,
+    isAdmin: PropTypes.bool,
+  }),
+  hide: PropTypes.shape({
+    name: PropTypes.bool,
+    email: PropTypes.bool,
+    password: PropTypes.bool,
+    confirmPassword: PropTypes.bool,
+    isAdmin: PropTypes.bool,
+  }),
 };
 
 UserForm.defaultProps = {

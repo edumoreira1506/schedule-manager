@@ -28,9 +28,9 @@ const Menu = ({ user }) => {
 };
 
 Menu.propTypes = {
-  user: PropTypes.objectOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-  })).isRequired,
+  user: PropTypes.shape({
+    name: PropTypes.string,
+  }).isRequired,
 };
 
 export default Menu;
