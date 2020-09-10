@@ -3,12 +3,24 @@ export default {
     login: 'Login',
     title: 'Gerenciador de Tarefas',
     hello: 'Olá {{name}}',
+    yes: 'Sim',
+    no: 'Não',
+    actions: 'Ações',
+    delete: 'Remover',
+    confirmDelete: 'Tem certeza que deseja excluir o dado?',
+    deleted: 'Dado excluído com sucesso.'
   },
   links: {
     home: 'Página inicial',
+    listUsers: 'Listagem de usuários',
   },
   user: {
     email: 'E-mail',
     password: 'Senha',
+    isAdmin: 'É admin?',
+    name: 'Nome',
+  },
+  users: {
+    other: 'Usuários',
   },
 };

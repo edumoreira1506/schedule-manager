@@ -11,14 +11,16 @@
 
     @media (min-width: $mobile-width) {
       width: 80%;
-      position: absolute;
+      position: fixed;
       right: 0;
       top: 0;
     }
   }
 
   @media (min-width: $mobile-width) {
-    padding-top: 10vh;
-    padding-left: 24%;
+    &__body {
+      padding-top: 10vh;
+      padding-left: 24%;
+    }
   }
 }

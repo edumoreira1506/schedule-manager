@@ -1,0 +1,46 @@
+@import "../../../../variables.scss";
+
+.AdminUsersList {
+  width: 100%;
+  height: auto;
+
+  &__title {
+    margin: 2em 0 1em 0;
+    font-size: 1.5em;
+    width: 96%;
+    border-bottom: solid 1px $border-color;
+    padding-bottom: 10px;
+  }
+
+  &__search {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 20px;
+  }
+
+  &__table {
+    width: 98%;
+
+    th {
+      padding: 15px 0;
+      text-align: left;
+
+      &:first-child {
+        text-align: center;
+      }
+    }
+
+    &-header {
+      background-color: $black;
+      color: $light-grey;
+    }
+  }
+
+  &__dower {
+    width: 4%;
+  }
+
+  &__arrow {
+    width: 48%;
+  }
+}
