@@ -4,6 +4,12 @@ api/node_modules
 # API yarn files
 api/yarn-error.log
 
+# e2e Dependencies
+e2e/node_modules
+
+# e2e yarn files
+e2e/yarn-error.log
+
 # Client Dependencies
 client/node_modules
 
