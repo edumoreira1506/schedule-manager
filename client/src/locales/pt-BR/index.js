@@ -43,6 +43,7 @@ export default {
     finishedAt: 'Finalizado em {{date}}',
     startedAt: 'Iniciado em {{date}}',
     description: 'Descrição',
+    requiredResponsible: 'Usuário responsável é obrigatório. ',
   },
   users: {
     other: 'Usuários',
