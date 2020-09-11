@@ -14,6 +14,7 @@ export default {
     edited: 'Dado editado com sucesso',
     edit: 'Editar',
     editPassword: 'Editar senha',
+    search: 'Buscar...',
   },
   links: {
     home: 'Página inicial',
@@ -40,5 +41,10 @@ export default {
   },
   users: {
     other: 'Usuários',
+  },
+  filters: {
+    keyword: 'Palavra de busca',
+    startsAt: 'Data de início',
+    finishesAt: 'Data de término',
   },
 };

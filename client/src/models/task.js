@@ -7,7 +7,7 @@ export const remove = async (userId, taskId, callback, taskService) => {
 export const all = async (filters = {}, callback, taskService) => {
   const mappedFilters = {
     ...(filters.page ? { page: filters.page } : {}),
-    ...(filters.keyWord ? { keyWord: filters.keyWord } : {}),
+    ...(filters.keyWord ? { keyword: filters.keyWord } : {}),
     ...(filters.userId ? { userId: filters.userId } : {}),
     ...(filters.startedAt ? { startedAt: filters.startedAt } : {}),
     ...(filters.finishedAt ? { finishedAt: filters.finishedAt } : {}),

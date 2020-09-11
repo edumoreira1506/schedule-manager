@@ -14,6 +14,7 @@ const Task = ({
   startedAt,
   user,
   onDelete,
+  canDelete,
 }) => {
   const { t } = useTranslation(['task']);
 
@@ -28,9 +29,11 @@ const Task = ({
       <p className="Task__user">{t('task:responsible', { name: user.name })}</p>
       <div className="Task__actions Flex Flex--align-center Flex--justify-around">
         <div className="Task__action">
-          <Button onClick={onDelete}>
-            <FaTrashAlt />
-          </Button>
+          {canDelete && (
+            <Button onClick={onDelete}>
+              <FaTrashAlt />
+            </Button>
+          )}
         </div>
       </div>
     </div>
@@ -43,14 +46,16 @@ Task.propTypes = {
   }).isRequired,
   description: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
-  finishedAt: PropTypes.string.isRequired,
-  startedAt: PropTypes.string.isRequired,
+  finishedAt: PropTypes.string,
+  startedAt: PropTypes.string,
   canDelete: PropTypes.bool,
   onDelete: PropTypes.func.isRequired,
 };
 
-Task.propTypes = {
+Task.defaultProps = {
   canDelete: false,
+  finishedAt: '',
+  startedAt: '',
 };
 
 export default Task;
