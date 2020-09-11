@@ -32,6 +32,12 @@ export default {
     name: 'Nome',
     confirmPassword: 'Confirmação de senha.',
   },
+  task: {
+    responsible: 'Usuário responsável: {{name}}',
+    createdAt: 'Criado em {{date}}',
+    finishedAt: 'Finalizado em {{date}}',
+    startedAt: 'Iniciado em {{date}}',
+  },
   users: {
     other: 'Usuários',
   },

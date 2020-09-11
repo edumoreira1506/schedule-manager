@@ -1,0 +1,33 @@
+@import "../../variables.scss";
+
+.Task {
+  width: 100%;
+  height: auto;
+
+  &__details {
+    flex-direction: column;
+    width: 100%;
+    height: 50px;
+
+    @media (min-width: $mobile-width) {
+      flex-direction: row;
+    }
+  }
+
+  &__time {
+    width: 100%;
+
+    @media (min-width: $mobile-width) {
+      width: 25%;
+    }
+  }
+
+  &__user {
+    text-align: center;
+    font-weight: bold;
+
+    @media (min-width: $mobile-width) {
+      text-align: left;
+    }
+  }
+}

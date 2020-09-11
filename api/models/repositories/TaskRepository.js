@@ -113,6 +113,9 @@ export const search = async ({ page = 0, ...filters }) => await Task.findAll({
   ],
   offset: page * ITEMS_PER_PAGE,
   limit: ITEMS_PER_PAGE,
+  include: [
+    { association: 'user' },
+  ],
 });
 
 export const findById = async id => {
