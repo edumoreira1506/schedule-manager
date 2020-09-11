@@ -20,4 +20,5 @@ export const adminRoutes = {
 
 export const userRoutes = {
   HOME: '/user/home',
+  TASKS: '/user/tasks',
 };
