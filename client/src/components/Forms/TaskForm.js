@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import Form from '../Form';
 import UserSearchInput from '../UserSearchInput';
 
@@ -8,8 +9,8 @@ const TaskForm = ({ onSubmit, task, hide }) => {
   const { t } = useTranslation(['task', 'common']);
   const [description, setDescription] = useState(task.description || '');
   const [responsibleId, setResponsibleId] = useState(task.responsibleId || '');
-  const [startedAt, setStartedAt] = useState('');
-  const [finishedAt, setFinishedAt] = useState('');
+  const [startedAt, setStartedAt] = useState(moment(task.startedAt).format('YYYY-MM-DD') || '');
+  const [finishedAt, setFinishedAt] = useState(moment(task.finishedAt).format('YYYY-MM-DD') || '');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -51,7 +52,7 @@ const TaskForm = ({ onSubmit, task, hide }) => {
   };
 
   const customFields = [
-    <UserSearchInput onSelect={handleSelectUser} />,
+    <UserSearchInput initialUser={task.responsible} onSelect={handleSelectUser} />,
   ];
 
   return (

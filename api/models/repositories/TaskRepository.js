@@ -113,7 +113,11 @@ export const search = async ({ page = 0, ...filters }) => await Task.findAll({
 export const findById = async id => {
   const repository = new Repository({ model: Task });
   
-  return await repository.findById(id);
+  return await repository.findById(id, {
+    include: [
+      { association: 'user' },
+    ]
+  });
 };
 
 export const updateById = async (id, newProps, callback) => {

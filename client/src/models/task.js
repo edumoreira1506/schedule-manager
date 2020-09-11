@@ -4,6 +4,18 @@ export const remove = async (userId, taskId, callback, taskService) => {
   return apiReponse.ok ? callback.onSuccess() : callback.onError(apiReponse.errors.join(' '));
 };
 
+export const show = async (userId, taskId, callback, taskService) => {
+  const apiReponse = await taskService.show(userId, taskId);
+
+  return apiReponse.ok ? callback.onSuccess(apiReponse.task) : callback.onError(apiReponse.errors.join(' '));
+};
+
+export const update = async (userId, taskId, newProps, callback, taskService) => {
+  const apiReponse = await taskService.update(userId, taskId, newProps);
+
+  return apiReponse.ok ? callback.onSuccess() : callback.onError(apiReponse.errors.join(' '));
+};
+
 export const register = async (userId, task, callback, taskService) => {
   const apiReponse = await taskService.register(userId, task);
 

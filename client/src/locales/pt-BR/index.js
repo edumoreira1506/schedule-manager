@@ -25,6 +25,7 @@ export default {
     editUserPassword: 'Editar senha',
     editProfile: 'Editar perfil',
     editPassword: 'Editar senha',
+    editTask: 'Editar tarefa',
     tasks: 'Listagem de tarefas',
   },
   user: {

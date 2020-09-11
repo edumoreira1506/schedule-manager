@@ -34,6 +34,40 @@ export const remove = async (userId, taskId) => {
   }
 };
 
+export const show = async (userId, taskId) => {
+  try {
+    RootAPI.setToken();
+
+    const { data } = await RootAPI.get(`/user/${userId}/task/${taskId}`);
+
+    return data;
+  } catch (error) {
+    const errors = error?.response?.data?.errors ?? [];
+
+    return {
+      ok: false,
+      errors,
+    };
+  }
+};
+
+export const update = async (userId, taskId, newProps) => {
+  try {
+    RootAPI.setToken();
+
+    const { data } = await RootAPI.patch(`/user/${userId}/task/${taskId}`, newProps);
+
+    return data;
+  } catch (error) {
+    const errors = error?.response?.data?.errors ?? [];
+
+    return {
+      ok: false,
+      errors,
+    };
+  }
+};
+
 export const register = async (userId, task) => {
   try {
     RootAPI.setToken();
