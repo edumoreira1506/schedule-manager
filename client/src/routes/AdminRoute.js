@@ -9,12 +9,10 @@ import withUserContext from '../wrappers/withUserContext';
 const AdminRoute = ({ component: Component, ...rest }) => {
   const user = getUser();
   const renderChildren = (props) => ((isAuthenticated() && user.isAdmin)
-    // eslint-disable-next-line react/jsx-props-no-spreading
     ? withTemplate(<Component {...props} />)
     : <Redirect to={getMainRoute(user)} />
   );
 
-  // eslint-disable-next-line react/jsx-props-no-spreading
   return (<Route {...rest} render={withUserContext(renderChildren)} />);
 };
 
