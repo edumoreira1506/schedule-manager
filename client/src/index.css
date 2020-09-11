@@ -1,5 +1,4 @@
 body {
-  overflow: hidden;
   margin: 0;
 }
 
@@ -17,6 +16,10 @@ body {
 
 .Flex--justify-start {
   justify-content: flex-start;
+}
+
+.Flex--justify-around {
+  justify-content: space-around;
 }
 
 .Flex--justify-between {

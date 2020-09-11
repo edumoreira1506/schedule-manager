@@ -13,11 +13,11 @@ export default class Repository {
     }
   }
 
-  async findById(id) {
+  async findById(id, options = {}) {
     if (!id) return null;
   
     try {
-      const test = await this.model.findByPk(id);
+      const test = await this.model.findByPk(id, options);
   
       if (!test) return null;
   

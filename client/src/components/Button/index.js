@@ -9,7 +9,6 @@ const Button = ({
   disabled,
   title,
 }) => (
-  // eslint-disable-next-line react/button-has-type
   <button title={title} className="Button" type={type} onClick={onClick} disabled={disabled}>
     {children}
   </button>

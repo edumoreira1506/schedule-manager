@@ -44,22 +44,14 @@ const createFilters = ({
   ...(userId ? ({ responsible: userId }) : {}),
   ...(!isEmpty(startedAt) && isEmpty(finishedAt) ? ({
     [Sequelize.Op.or]: [
-      {
-        startedAt: new Date(startedAt)
-      },
-      {
-        createdAt: new Date(startedAt)
-      }
+      Sequelize.where(Sequelize.fn('date', Sequelize.col('startedAt')), '=', startedAt),
+      Sequelize.where(Sequelize.fn('date', Sequelize.col('Task.createdAt')), '=', startedAt),
     ]
   }) : {}),
   ...(!isEmpty(finishedAt) && isEmpty(startedAt) ? ({
     [Sequelize.Op.or]: [
-      {
-        finishedAt: new Date(finishedAt)
-      },
-      {
-        createdAt: new Date(finishedAt)
-      }
+      Sequelize.where(Sequelize.fn('date', Sequelize.col('finishedAt')), '=', finishedAt),
+      Sequelize.where(Sequelize.fn('date', Sequelize.col('Task.createdAt')), '=', finishedAt),
     ]
   }) : {}),
   ...(!isEmpty(startedAt) && !isEmpty(finishedAt) ? ({
@@ -113,12 +105,19 @@ export const search = async ({ page = 0, ...filters }) => await Task.findAll({
   ],
   offset: page * ITEMS_PER_PAGE,
   limit: ITEMS_PER_PAGE,
+  include: [
+    { association: 'user' },
+  ],
 });
 
 export const findById = async id => {
   const repository = new Repository({ model: Task });
   
-  return await repository.findById(id);
+  return await repository.findById(id, {
+    include: [
+      { association: 'user' },
+    ]
+  });
 };
 
 export const updateById = async (id, newProps, callback) => {

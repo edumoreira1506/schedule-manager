@@ -1,10 +1,13 @@
 import TaskMapper from './mappers/TaskMapper.js';
 import { show as showUser, authenticateAsAdmin } from './User.js';
 import UserMapper from './mappers/UserMapper.js';
+import moment from 'moment';
 
-export const taskTemplate = (task, user) => ({
+export const taskTemplate = ({ startedAt, finishedAt, ...task }, user) => ({
   ...task,
-  responsible: user.id
+  responsible: user.id,
+  startedAt: moment(startedAt).isValid() ? moment(startedAt).format() : null,
+  finishedAt: moment(finishedAt).isValid() ? moment(finishedAt).format() : null,
 });
 
 export const store = async (task, userId, token, callback, dependencies) => await showUser(token, userId, {
@@ -59,13 +62,14 @@ export const show = async (token, userId, taskId, callback, dependencies) => awa
 export const update = async (newProps, token, userId, taskId, callback, dependencies) => await show(token, userId, taskId, {
   ...callback,
   onFound: async task => {
-    const { repositories: { TaskRepository } } = dependencies;
+    const { repositories: { TaskRepository }, services: { Token } } = dependencies;
     const taskDTO = TaskMapper.toDTO(task);
+    const userOfToken = Token.decrypt(token);
 
     taskDTO.addProps(newProps);
 
     return taskDTO.validate({
-      onValidated: async () => await TaskRepository.updateById(taskId, newProps, callback),
+      onValidated: async () => await TaskRepository.updateById(taskId, taskTemplate(newProps, userOfToken), callback),
       onInvalidated: callback.onError
     });
   }

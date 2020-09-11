@@ -7,12 +7,10 @@ import { isAuthenticated, getMainRoute } from '../models/user';
 const PublicRoute = ({ component: Component, ...rest }) => {
   const user = getUser();
   const renderChildren = (props) => (!isAuthenticated()
-    // eslint-disable-next-line react/jsx-props-no-spreading
     ? <Component {...props} />
     : <Redirect to={getMainRoute(user)} />
   );
 
-  // eslint-disable-next-line react/jsx-props-no-spreading
   return (<Route {...rest} render={renderChildren} />);
 };
 

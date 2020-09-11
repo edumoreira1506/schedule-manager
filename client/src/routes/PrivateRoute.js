@@ -8,12 +8,10 @@ import withUserContext from '../wrappers/withUserContext';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const renderChildren = (props) => ((isAuthenticated())
-    // eslint-disable-next-line react/jsx-props-no-spreading
     ? withTemplate(<Component {...props} />)
     : <Redirect to={publicRoutes.LOGIN} />
   );
 
-  // eslint-disable-next-line react/jsx-props-no-spreading
   return (<Route {...rest} render={withUserContext(renderChildren)} />);
 };
 

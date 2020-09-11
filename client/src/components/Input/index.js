@@ -1,6 +1,6 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import './index.scss';
 
 const Input = ({
@@ -8,6 +8,8 @@ const Input = ({
   value,
   type,
   placeholder,
+  onBlur,
+  onFocus,
 }) => (type === 'radio' ? (
   <div className="InputWrapper Flex Flex--justify-center Flex--align-center">
     <label className="Input__label">{placeholder}</label>
@@ -25,7 +27,10 @@ const Input = ({
     type={type}
     value={value}
     onChange={(e) => onChange(e.target.value)}
+    autoComplete="off"
     placeholder={placeholder}
+    onFocus={onFocus}
+    onBlur={onBlur}
   />
 ));
 
@@ -34,10 +39,14 @@ Input.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   type: PropTypes.node.isRequired,
   placeholder: PropTypes.string.isRequired,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
 };
 
 Input.defaultProps = {
   value: '',
+  onFocus: () => {},
+  onBlur: () => {},
 };
 
 export default Input;

@@ -13,6 +13,9 @@ export const adminRoutes = {
   NEW_USER: '/admin/users/new',
   EDIT_USER: (id) => `/admin/users/${id}/edit`,
   EDIT_PASSWORD: (id) => `/admin/users/${id}/edit_password`,
+  TASKS: '/admin/tasks',
+  NEW_TASK: '/admin/tasks/new',
+  EDIT_TASK: (userId, taskId) => `/admin/users/${userId}/tasks/${taskId}/edit`,
 };
 
 export const userRoutes = {
