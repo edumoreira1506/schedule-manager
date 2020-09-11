@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import useApi from '../../../../hooks/useApi';
 import useService from '../../../../hooks/useService';
@@ -6,6 +7,7 @@ import { all, remove } from '../../../../models/task';
 import Task from '../../../../components/Task';
 import Input from '../../../../components/Input';
 import UserSearchInput from '../../../../components/UserSearchInput';
+import { adminRoutes } from '../../../../config/constants';
 
 import './index.scss';
 
@@ -21,6 +23,7 @@ const TasksPage = () => {
   const [startAtFilter, setStartAtFilter] = useState('');
   const [finishedAtFilter, setFinishedAtFilter] = useState('');
   const customAlerts = useService('Alert');
+  const history = useHistory();
   const { t } = useTranslation(['links', 'common', 'task', 'filters']);
 
   const handleDelete = (task) => remove(task.user.id, task.id, {
@@ -54,6 +57,10 @@ const TasksPage = () => {
   const handleSelectUser = (user) => {
     setUserId(user.id);
     setReplaceTasks(true);
+  };
+
+  const handleEdit = (task) => {
+    history.push(adminRoutes.EDIT_TASK(task.user.id, task.id));
   };
 
   useEffect(() => {
@@ -134,8 +141,8 @@ const TasksPage = () => {
               createdAt={task.createdAt}
               finishedAt={task.finishedAt}
               startedAt={task.startedAt}
-              canDelete
               onDelete={() => handleDelete(task)}
+              onEdit={() => handleEdit(task)}
             />
           </li>
         ))}

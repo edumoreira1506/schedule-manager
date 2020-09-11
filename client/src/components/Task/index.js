@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
-import { FaTrashAlt } from 'react-icons/fa';
+import { FaTrashAlt, FaEdit } from 'react-icons/fa';
 import Button from '../Button';
 
 import './index.scss';
@@ -14,7 +14,7 @@ const Task = ({
   startedAt,
   user,
   onDelete,
-  canDelete,
+  onEdit,
 }) => {
   const { t } = useTranslation(['task']);
 
@@ -29,11 +29,14 @@ const Task = ({
       <p className="Task__user">{t('task:responsible', { name: user.name })}</p>
       <div className="Task__actions Flex Flex--align-center Flex--justify-around">
         <div className="Task__action">
-          {canDelete && (
-            <Button onClick={onDelete}>
-              <FaTrashAlt />
-            </Button>
-          )}
+          <Button onClick={onDelete}>
+            <FaTrashAlt />
+          </Button>
+        </div>
+        <div className="Task__action">
+          <Button onClick={onEdit}>
+            <FaEdit />
+          </Button>
         </div>
       </div>
     </div>
@@ -48,12 +51,11 @@ Task.propTypes = {
   createdAt: PropTypes.string.isRequired,
   finishedAt: PropTypes.string,
   startedAt: PropTypes.string,
-  canDelete: PropTypes.bool,
   onDelete: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
 };
 
 Task.defaultProps = {
-  canDelete: false,
   finishedAt: '',
   startedAt: '',
 };
