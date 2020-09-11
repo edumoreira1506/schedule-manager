@@ -1,3 +1,9 @@
+export const remove = async (userId, taskId, callback, taskService) => {
+  const apiReponse = await taskService.remove(userId, taskId);
+
+  return apiReponse.ok ? callback.onSuccess() : callback.onError(apiReponse.errors.join(' '));
+};
+
 export const all = async (filters = {}, callback, taskService) => {
   const mappedFilters = {
     ...(filters.page ? { page: filters.page } : {}),

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import useApi from '../../../hooks/useApi';
 import useService from '../../../hooks/useService';
-import { useTranslation } from 'react-i18next';
 import { all } from '../../../models/task';
 import Task from '../../../components/Task';
+import { remove } from '../../../models/task';
 
 import './index.scss';
 
@@ -13,14 +14,22 @@ const TasksPage = () => {
   const [pages, setPages] = useState(0);
   const [page, setPage] = useState(0);
   const customAlerts = useService('Alert');
-  const { t } = useTranslation(['links']);
+  const { t } = useTranslation(['links', 'common']);
+
+  const handleDelete = (task) => remove(task.user.id, task.id, {
+    onSuccess: () => {
+      customAlerts.success(t('common:deleted'));
+      setTasks((prevTasks) => prevTasks.filter((t) => t.id !== task.id));
+    },
+    onError: customAlerts.error,
+  }, taskAPI);
 
   useEffect(() => {
     const fetchTasks = () => all({
       page,
     }, {
       onSuccess: (tasksFromAPI, pagesFromAPI) => {
-        setTasks(tasksFromAPI);
+        setTasks((prevTasks) => [...tasksFromAPI, ...prevTasks]);
         setPages(pagesFromAPI);
       },
       onError: customAlerts.error,
@@ -57,6 +66,8 @@ const TasksPage = () => {
               createdAt={task.createdAt}
               finishedAt={task.finishedAt}
               startedAt={task.startedAt}
+              canDelete
+              onDelete={() => handleDelete(task)}
             />
           </li>
         ))}

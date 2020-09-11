@@ -2,7 +2,13 @@
 
 .Task {
   width: 100%;
+  padding-bottom: 15px;
   height: auto;
+
+  &__description {
+    width: 100%;
+    text-align: left;
+  }
 
   &__details {
     flex-direction: column;
@@ -29,5 +35,14 @@
     @media (min-width: $mobile-width) {
       text-align: left;
     }
+  }
+  
+  &__actions {
+    width: 45%;
+  }
+
+  &__action {
+    height: 30px;
+    width: 40%;
   }
 }

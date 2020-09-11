@@ -16,3 +16,20 @@ export const all = async (filters) => {
     };
   }
 };
+
+export const remove = async (userId, taskId) => {
+  try {
+    RootAPI.setToken();
+
+    const { data } = await RootAPI.delete(`/user/${userId}/task/${taskId}`);
+
+    return data;
+  } catch (error) {
+    const errors = error?.response?.data?.errors ?? [];
+
+    return {
+      ok: false,
+      errors,
+    };
+  }
+};
