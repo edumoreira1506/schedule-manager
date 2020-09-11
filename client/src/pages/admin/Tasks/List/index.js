@@ -85,6 +85,7 @@ const TasksPage = () => {
     }, taskAPI);
 
     fetchTasks();
+    // eslint-disable-next-line
   }, [customAlerts, taskAPI, page, keyWord, startAtFilter, finishedAtFilter, userId]);
 
   useEffect(() => {

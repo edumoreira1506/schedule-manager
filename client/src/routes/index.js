@@ -17,7 +17,12 @@ import NewTask from '../pages/admin/Tasks/New';
 import EditTask from '../pages/admin/Tasks/Edit';
 import UserHome from '../pages/user/Home';
 import UserTasks from '../pages/user/Tasks/List';
-import { publicRoutes, adminRoutes, privateRoutes, userRoutes } from '../config/constants';
+import {
+  publicRoutes,
+  adminRoutes,
+  privateRoutes,
+  userRoutes,
+} from '../config/constants';
 
 const Routes = () => (
   <BrowserRouter>
