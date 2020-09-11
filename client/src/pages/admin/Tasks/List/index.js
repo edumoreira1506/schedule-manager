@@ -78,7 +78,6 @@ const TasksPage = () => {
     }, taskAPI);
 
     fetchTasks();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [customAlerts, taskAPI, page, keyWord, startAtFilter, finishedAtFilter, userId]);
 
   useEffect(() => {

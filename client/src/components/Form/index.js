@@ -4,7 +4,12 @@ import Button from '../Button';
 import Input from '../Input';
 import './index.scss';
 
-const Form = ({ onSubmit, inputs, buttonText, customFields }) => (
+const Form = ({
+  onSubmit,
+  inputs,
+  buttonText,
+  customFields,
+}) => (
   <form className="Form Flex Flex--justify-center Flex--align-center Flex--vertical-alignment" onSubmit={onSubmit}>
     {inputs.map((input) => (input.hide ? null : (
       <div className="Form__area" key={input.placeholder}>
@@ -36,7 +41,7 @@ Form.propTypes = {
     hide: PropTypes.bool,
   })),
   buttonText: PropTypes.string.isRequired,
-  customFields: PropTypes.array,
+  customFields: PropTypes.arrayOf(PropTypes.node),
 };
 
 Form.defaultProps = {

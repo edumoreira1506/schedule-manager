@@ -33,9 +33,9 @@ const UserSearchInput = ({ onSelect, initialUser }) => {
     setShowUserAutoComplete(!showUserAutoComplete);
   }, 100);
 
-  const handleSelectUser = (user) => {
-    setUser(user.name);
-    onSelect(user);
+  const handleSelectUser = (u) => {
+    setUser(u.name);
+    onSelect(u);
   };
 
   return (
