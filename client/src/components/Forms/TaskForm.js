@@ -51,7 +51,7 @@ const TaskForm = ({ onSubmit, task, hide }) => {
     setResponsibleId(user.id);
   };
 
-  const customFields = [
+  const customFields = hide.responsible ? [] : [
     <UserSearchInput initialUser={task.responsible} onSelect={handleSelectUser} />,
   ];
 
