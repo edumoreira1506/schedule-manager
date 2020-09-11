@@ -9,22 +9,20 @@ const Form = ({
   inputs,
   buttonText,
   customFields,
+  buttonSelector,
 }) => (
   <form className="Form Flex Flex--justify-center Flex--align-center Flex--vertical-alignment" onSubmit={onSubmit}>
     {inputs.map((input) => (input.hide ? null : (
       <div className="Form__area" key={input.placeholder}>
         <Input
           className="Form__input"
-          value={input.value}
-          type={input.type}
-          onChange={input.onChange}
-          placeholder={input.placeholder}
+          {...input}
         />
       </div>
     )))}
     {customFields.map((field) => <div className="Form__area" key={field}>{field}</div>)}
     <div className="Form__submit-button">
-      <Button onClick={onSubmit} type="submit">
+      <Button onClick={onSubmit} type="submit" selector={buttonSelector}>
         {buttonText}
       </Button>
     </div>
@@ -42,11 +40,13 @@ Form.propTypes = {
   })),
   buttonText: PropTypes.string.isRequired,
   customFields: PropTypes.arrayOf(PropTypes.node),
+  buttonSelector: PropTypes.string,
 };
 
 Form.defaultProps = {
   inputs: [],
   customFields: [],
+  buttonSelector: '',
 };
 
 export default Form;

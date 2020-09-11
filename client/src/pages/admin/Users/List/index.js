@@ -80,10 +80,10 @@ const AdminUsersList = () => {
               <td>{user.name}</td>
               <td>
                 <div className="AdminUsersList__table-action">
-                  <Button title={t('common:delete')} onClick={() => handleRemoveUser(user)} type="button"><FaTrashAlt /></Button>
+                  <Button selector="delete-user" title={t('common:delete')} onClick={() => handleRemoveUser(user)} type="button"><FaTrashAlt /></Button>
                 </div>
                 <div className="AdminUsersList__table-action">
-                  <Button title={t('common:edit')} onClick={() => handleNavigateToEditPage(user)} type="button"><FaEdit /></Button>
+                  <Button selector="edit-user" title={t('common:edit')} onClick={() => handleNavigateToEditPage(user)} type="button"><FaEdit /></Button>
                 </div>
                 <div className="AdminUsersList__table-action">
                   <Button title={t('common:editPassword')} onClick={() => handleNavigateToEditPasswordPage(user)} type="button"><FaLock /></Button>

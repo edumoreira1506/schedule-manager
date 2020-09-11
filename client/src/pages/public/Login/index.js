@@ -41,15 +41,18 @@ const PublicLoginPage = () => {
               onChange: setEmail,
               placeholder: t('user:email'),
               type: 'email',
+              selector: 'email',
             },
             {
               value: password,
               onChange: setPassword,
               placeholder: t('user:password'),
               type: 'password',
+              selector: 'password',
             },
           ]}
           buttonText={t('common:login')}
+          buttonSelector="login"
         />
       </div>
     </div>

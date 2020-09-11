@@ -38,7 +38,7 @@ const UserSearchInput = ({ onSelect, initialUser }) => {
 
   return (
     <div className="UserSearchInput">
-      <Input type="text" onFocus={handleToggleAutoComplete} onBlur={handleToggleAutoComplete} placeholder={t('common:search')} value={user} onChange={setUser} />
+      <Input selector="search-user" type="text" onFocus={handleToggleAutoComplete} onBlur={handleToggleAutoComplete} placeholder={t('common:search')} value={user} onChange={setUser} />
       {showUserAutoComplete && (
         <div className="UserSearchInput__autocomplete Flex Flex--justify-start Flex--align-center Flex--vertical-alignment">
           {users.map((item) => (

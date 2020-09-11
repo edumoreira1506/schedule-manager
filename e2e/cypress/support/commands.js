@@ -1,25 +1,27 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add("login", (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add("dismiss", { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+Cypress.Commands.add('visitSite', () => {
+  cy.visit('http://localhost:3000');
+});
+
+Cypress.Commands.add('fillInput', (dataSelector, value) => {
+  cy.get(`[data-input="${dataSelector}"]`).clear();
+  cy.get(`[data-input="${dataSelector}"]`).type(value);
+});
+
+Cypress.Commands.add('clickButton', (dataSelector) => {
+  cy.get(`[data-element="${dataSelector}"]`).first().click();
+});
+
+Cypress.Commands.add('clickLink', (dataSelector) => {
+  cy.get(`[data-link="${dataSelector}"]`).first().click();
+});
+
+Cypress.Commands.add('login', (email, password) => {
+  cy.visitSite();
+  cy.fillInput('email', email);
+  cy.fillInput('password', password);
+  cy.clickButton('login');
+});
+
+Cypress.Commands.add('confirmSwal', () => {
+  cy.get('.swal2-confirm').first().click();
+});

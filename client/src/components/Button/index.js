@@ -9,8 +9,9 @@ const Button = ({
   disabled,
   title,
   testId,
+  selector,
 }) => (
-  <button title={title} data-testid={testId} className="Button" type={type} onClick={onClick} disabled={disabled}>
+  <button data-element={selector} title={title} data-testid={testId} className="Button" type={type} onClick={onClick} disabled={disabled}>
     {children}
   </button>
 );
@@ -22,6 +23,7 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   title: PropTypes.string,
   testId: PropTypes.string,
+  selector: PropTypes.string,
 };
 
 Button.defaultProps = {
@@ -29,6 +31,7 @@ Button.defaultProps = {
   disabled: false,
   title: '',
   testId: '',
+  selector: '',
 };
 
 export default Button;
