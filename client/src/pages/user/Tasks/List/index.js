@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import useApi from '../../../../hooks/useApi';
 import useService from '../../../../hooks/useService';
-import { all, remove } from '../../../../models/task';
+import { index, remove } from '../../../../models/task';
 import Task from '../../../../components/Task';
 import Input from '../../../../components/Input';
-import UserSearchInput from '../../../../components/UserSearchInput';
-import { adminRoutes } from '../../../../config/constants';
 
 import './index.scss';
 
 const TasksPage = () => {
   const dateFilters = { FINISHED_AT: 'FINISHED_AT', STARTS_AT: 'STARTS_AT' };
   const taskAPI = useApi('task');
-  const [userId, setUserId] = useState(null);
   const [tasks, setTasks] = useState([]);
   const [pages, setPages] = useState(0);
   const [page, setPage] = useState(0);
@@ -23,8 +19,9 @@ const TasksPage = () => {
   const [startAtFilter, setStartAtFilter] = useState('');
   const [finishedAtFilter, setFinishedAtFilter] = useState('');
   const customAlerts = useService('Alert');
-  const history = useHistory();
+  const LocalStorage = useService('LocalStorage');
   const { t } = useTranslation(['links', 'common', 'task', 'filters']);
+  const userId = LocalStorage.getUser().id;
 
   const handleDelete = (task) => remove(task.user.id, task.id, {
     onSuccess: () => {
@@ -54,22 +51,12 @@ const TasksPage = () => {
     }
   };
 
-  const handleSelectUser = (user) => {
-    setUserId(user.id);
-    setReplaceTasks(true);
-  };
-
-  const handleEdit = (task) => {
-    history.push(adminRoutes.EDIT_TASK(task.user.id, task.id));
-  };
-
   useEffect(() => {
-    const fetchTasks = () => all({
+    const fetchTasks = () => index(userId, {
       page,
       keyWord,
       startedAt: startAtFilter,
       finishedAt: finishedAtFilter,
-      userId,
     }, {
       onSuccess: (tasksFromAPI, pagesFromAPI) => {
         setPages(pagesFromAPI);
@@ -126,12 +113,6 @@ const TasksPage = () => {
             <Input type="date" placeholder={t('task:finishedAt')} value={finishedAtFilter} onChange={(value) => handleChangeDateFilter(dateFilters.FINISHED_AT, value)} />
           </div>
         </div>
-        <div className="TasksPage__input Flex">
-          <div className="TasksPage__input-label">{t('filters:responsible')}</div>
-          <div className="TasksPage__input-text TasksPage__input-text--user">
-            <UserSearchInput onSelect={handleSelectUser} />
-          </div>
-        </div>
       </div>
       <ul className="TasksPage__tasks">
         {tasks.map((task) => (
@@ -143,7 +124,6 @@ const TasksPage = () => {
               finishedAt={task.finishedAt}
               startedAt={task.startedAt}
               onDelete={() => handleDelete(task)}
-              onEdit={() => handleEdit(task)}
             />
           </li>
         ))}

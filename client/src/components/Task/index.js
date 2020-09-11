@@ -33,11 +33,13 @@ const Task = ({
             <FaTrashAlt />
           </Button>
         </div>
-        <div className="Task__action">
-          <Button onClick={onEdit}>
-            <FaEdit />
-          </Button>
-        </div>
+        {onEdit && (
+          <div className="Task__action">
+            <Button onClick={onEdit}>
+              <FaEdit />
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );
