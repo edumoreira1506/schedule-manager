@@ -46,5 +46,6 @@ export default {
     keyword: 'Palavra de busca',
     startsAt: 'Data de início',
     finishesAt: 'Data de término',
+    responsible: 'Usuário responsável',
   },
 };
