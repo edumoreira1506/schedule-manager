@@ -15,7 +15,8 @@ import EditPassword from '../pages/private/EditPassword';
 import Tasks from '../pages/admin/Tasks/List';
 import NewTask from '../pages/admin/Tasks/New';
 import EditTask from '../pages/admin/Tasks/Edit';
-import { publicRoutes, adminRoutes, privateRoutes } from '../config/constants';
+import UserHome from '../pages/user/Home';
+import { publicRoutes, adminRoutes, privateRoutes, userRoutes } from '../config/constants';
 
 const Routes = () => (
   <BrowserRouter>
@@ -34,6 +35,8 @@ const Routes = () => (
 
       <PrivateRoute exact path={privateRoutes.EDIT_PROFILE} component={EditProfile} />
       <PrivateRoute exact path={privateRoutes.EDIT_PASSWORD} component={EditPassword} />
+
+      <PrivateRoute exact path={userRoutes.HOME} component={UserHome} />
     </Switch>
   </BrowserRouter>
 );
