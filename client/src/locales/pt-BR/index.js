@@ -15,6 +15,7 @@ export default {
     edit: 'Editar',
     editPassword: 'Editar senha',
     search: 'Buscar...',
+    welcome: 'Bem vindo!',
   },
   links: {
     home: 'Página inicial',
