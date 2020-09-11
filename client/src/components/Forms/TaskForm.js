@@ -4,9 +4,11 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import Form from '../Form';
 import UserSearchInput from '../UserSearchInput';
+import useService from '../../hooks/useService';
 
 const TaskForm = ({ onSubmit, task, hide }) => {
   const { t } = useTranslation(['task', 'common']);
+  const customAlerts = useService('Alert');
   const [description, setDescription] = useState(task.description || '');
   const [responsibleId, setResponsibleId] = useState(task.responsibleId || '');
   const [startedAt, setStartedAt] = useState(moment(task.startedAt).format('YYYY-MM-DD') || '');
@@ -14,6 +16,8 @@ const TaskForm = ({ onSubmit, task, hide }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!responsibleId) return customAlerts.error(t('task:requiredResponsible'));
 
     return onSubmit({
       description,
