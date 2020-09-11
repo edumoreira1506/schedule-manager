@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import useApi from '../../../../hooks/useApi';
 import useService from '../../../../hooks/useService';
@@ -21,7 +20,6 @@ const TasksPage = () => {
   const [finishedAtFilter, setFinishedAtFilter] = useState('');
   const customAlerts = useService('Alert');
   const LocalStorage = useService('LocalStorage');
-  // const history = useHistory();
   const { t } = useTranslation(['links', 'common', 'task', 'filters']);
   const userId = LocalStorage.getUser().id;
 
@@ -51,10 +49,6 @@ const TasksPage = () => {
       setReplaceTasks(true);
       setPages(0);
     }
-  };
-
-  const handleEdit = (task) => {
-    // history.push(adminRoutes.EDIT_TASK(task.user.id, task.id));
   };
 
   useEffect(() => {
@@ -129,7 +123,6 @@ const TasksPage = () => {
               finishedAt={task.finishedAt}
               startedAt={task.startedAt}
               onDelete={() => handleDelete(task)}
-              onEdit={() => handleEdit(task)}
             />
           </li>
         ))}
