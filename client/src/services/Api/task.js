@@ -17,6 +17,23 @@ export const all = async (filters) => {
   }
 };
 
+export const index = async (userId, filters) => {
+  try {
+    RootAPI.setToken();
+
+    const { data } = await RootAPI.get(`/user/${userId}/task`, { params: filters });
+
+    return data;
+  } catch (error) {
+    const errors = error?.response?.data?.errors ?? [];
+
+    return {
+      ok: false,
+      errors,
+    };
+  }
+};
+
 export const remove = async (userId, taskId) => {
   try {
     RootAPI.setToken();
