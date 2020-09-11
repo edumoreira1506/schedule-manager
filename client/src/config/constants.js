@@ -22,4 +22,5 @@ export const userRoutes = {
   HOME: '/user/home',
   TASKS: '/user/tasks',
   EDIT_TASK: (id) => `/users/tasks/${id}`,
+  NEW_TASK: '/users/task/new',
 };

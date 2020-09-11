@@ -18,6 +18,7 @@ import EditTask from '../pages/admin/Tasks/Edit';
 import UserHome from '../pages/user/Home';
 import UserTasks from '../pages/user/Tasks/List';
 import UserEditTask from '../pages/user/Tasks/Edit';
+import UserNewTask from '../pages/user/Tasks/New';
 
 import {
   publicRoutes,
@@ -47,6 +48,7 @@ const Routes = () => (
       <PrivateRoute exact path={userRoutes.HOME} component={UserHome} />
       <PrivateRoute exact path={userRoutes.TASKS} component={UserTasks} />
       <PrivateRoute exact path={userRoutes.EDIT_TASK(':taskId')} component={UserEditTask} />
+      <PrivateRoute exact path={userRoutes.NEW_TASK} component={UserNewTask} />
     </Switch>
   </BrowserRouter>
 );

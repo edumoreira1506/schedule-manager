@@ -83,5 +83,9 @@ export const getMenuLinks = (user) => (user.isAdmin ? [
     href: userRoutes.TASKS,
     i18nKey: 'myTasks',
   },
+  {
+    href: userRoutes.NEW_TASK,
+    i18nKey: 'newTask',
+  },
   ...sharedRoutes,
 ]);
