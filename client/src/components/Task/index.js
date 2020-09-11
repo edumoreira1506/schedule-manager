@@ -29,12 +29,12 @@ const Task = ({
       <p className="Task__user">{t('task:responsible', { name: user.name })}</p>
       <div className="Task__actions Flex Flex--align-center Flex--justify-around">
         <div className="Task__action">
-          <Button onClick={onDelete} testId="delete-task">
+          <Button selector="delete-task" onClick={onDelete} testId="delete-task">
             <FaTrashAlt />
           </Button>
         </div>
         <div className="Task__action">
-          <Button onClick={onEdit} testId="edit-task">
+          <Button onClick={onEdit} selector="edit-task" testId="edit-task">
             <FaEdit />
           </Button>
         </div>

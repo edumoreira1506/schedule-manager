@@ -30,6 +30,7 @@ const TaskForm = ({ onSubmit, task, hide }) => {
       type: 'text',
       onChange: setDescription,
       hide: hide.description,
+      selector: 'task-description',
     },
     {
       value: startedAt,
@@ -56,7 +57,7 @@ const TaskForm = ({ onSubmit, task, hide }) => {
   ];
 
   return (
-    <Form customFields={customFields} inputs={inputs} buttonText={t('common:save')} onSubmit={handleSubmit} />
+    <Form customFields={customFields} inputs={inputs} buttonText={t('common:save')} onSubmit={handleSubmit} buttonSelector="task-post-button" />
   );
 };
 

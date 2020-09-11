@@ -10,6 +10,7 @@ const Input = ({
   placeholder,
   onBlur,
   onFocus,
+  selector,
 }) => (type === 'radio' ? (
   <div className="InputWrapper Flex Flex--justify-center Flex--align-center">
     <label className="Input__label">{placeholder}</label>
@@ -19,6 +20,7 @@ const Input = ({
       checked={value}
       onClick={onChange}
       onChange={onChange}
+      data-input={selector}
     />
   </div>
 ) : (
@@ -31,6 +33,7 @@ const Input = ({
     placeholder={placeholder}
     onFocus={onFocus}
     onBlur={onBlur}
+    data-input={selector}
   />
 ));
 
@@ -41,12 +44,14 @@ Input.propTypes = {
   placeholder: PropTypes.string.isRequired,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
+  selector: PropTypes.string,
 };
 
 Input.defaultProps = {
   value: '',
   onFocus: () => {},
   onBlur: () => {},
+  selector: '',
 };
 
 export default Input;

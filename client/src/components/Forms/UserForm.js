@@ -32,6 +32,7 @@ const UserForm = ({ onSubmit, user, hide }) => {
       type: 'text',
       onChange: setName,
       hide: hide.name,
+      selector: 'user-name',
     },
     {
       value: email,
@@ -39,6 +40,7 @@ const UserForm = ({ onSubmit, user, hide }) => {
       type: 'email',
       onChange: setEmail,
       hide: hide.email,
+      selector: 'user-email',
     },
     {
       value: password,
@@ -46,6 +48,7 @@ const UserForm = ({ onSubmit, user, hide }) => {
       type: 'password',
       onChange: setPassword,
       hide: hide.password,
+      selector: 'user-password',
     },
     {
       value: confirmPassword,
@@ -53,6 +56,7 @@ const UserForm = ({ onSubmit, user, hide }) => {
       type: 'password',
       onChange: setConfirmPassword,
       hide: hide.confirmPassword,
+      selector: 'user-confirm-password',
     },
     {
       value: isAdmin,
@@ -64,7 +68,7 @@ const UserForm = ({ onSubmit, user, hide }) => {
   ];
 
   return (
-    <Form inputs={inputs} buttonText={t('common:save')} onSubmit={handleSubmit} />
+    <Form inputs={inputs} buttonText={t('common:save')} onSubmit={handleSubmit} buttonSelector="user-post-button" />
   );
 };
 
