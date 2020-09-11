@@ -8,8 +8,9 @@ const Button = ({
   type,
   disabled,
   title,
+  testId,
 }) => (
-  <button title={title} className="Button" type={type} onClick={onClick} disabled={disabled}>
+  <button title={title} data-testid={testId} className="Button" type={type} onClick={onClick} disabled={disabled}>
     {children}
   </button>
 );
@@ -20,12 +21,14 @@ Button.propTypes = {
   children: PropTypes.node.isRequired,
   disabled: PropTypes.bool,
   title: PropTypes.string,
+  testId: PropTypes.string,
 };
 
 Button.defaultProps = {
   type: 'button',
   disabled: false,
   title: '',
+  testId: '',
 };
 
 export default Button;
