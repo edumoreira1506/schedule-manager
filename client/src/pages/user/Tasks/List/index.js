@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import useApi from '../../../../hooks/useApi';
 import useService from '../../../../hooks/useService';
 import { index, remove } from '../../../../models/task';
 import Task from '../../../../components/Task';
 import Input from '../../../../components/Input';
+import { userRoutes } from '../../../../config/constants';
 
 import './index.scss';
 
@@ -21,6 +23,7 @@ const TasksPage = () => {
   const customAlerts = useService('Alert');
   const LocalStorage = useService('LocalStorage');
   const { t } = useTranslation(['links', 'common', 'task', 'filters']);
+  const history = useHistory();
   const userId = LocalStorage.getUser().id;
 
   const handleDelete = (task) => remove(task.user.id, task.id, {
@@ -49,6 +52,10 @@ const TasksPage = () => {
       setReplaceTasks(true);
       setPages(0);
     }
+  };
+
+  const handleEdit = (task) => {
+    history.push(userRoutes.EDIT_TASK(task.id));
   };
 
   useEffect(() => {
@@ -124,6 +131,7 @@ const TasksPage = () => {
               finishedAt={task.finishedAt}
               startedAt={task.startedAt}
               onDelete={() => handleDelete(task)}
+              onEdit={() => handleEdit(task)}
             />
           </li>
         ))}
