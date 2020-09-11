@@ -12,7 +12,8 @@ import Login from '../pages/public/Login';
 import AdminHome from '../pages/admin/Home';
 import EditProfile from '../pages/private/EditProfile';
 import EditPassword from '../pages/private/EditPassword';
-import Tasks from '../pages/admin/Tasks';
+import Tasks from '../pages/admin/Tasks/List';
+import NewTask from '../pages/admin/Tasks/New';
 import { publicRoutes, adminRoutes, privateRoutes } from '../config/constants';
 
 const Routes = () => (
@@ -27,6 +28,7 @@ const Routes = () => (
       <AdminRoute exact path={adminRoutes.EDIT_USER(':userId')} component={AdminUsersEdit} />
       <AdminRoute exact path={adminRoutes.EDIT_PASSWORD(':userId')} component={AdminUsersEditPassword} />
       <AdminRoute exact path={adminRoutes.TASKS} component={Tasks} />
+      <AdminRoute exact path={adminRoutes.NEW_TASK} component={NewTask} />
 
       <PrivateRoute exact path={privateRoutes.EDIT_PROFILE} component={EditProfile} />
       <PrivateRoute exact path={privateRoutes.EDIT_PASSWORD} component={EditPassword} />

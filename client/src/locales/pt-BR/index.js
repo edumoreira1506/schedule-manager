@@ -20,6 +20,7 @@ export default {
     home: 'Página inicial',
     listUsers: 'Listagem de usuários',
     newUser: 'Novo usuário',
+    newTask: 'Nova tarefa',
     editUser: 'Editar usuário',
     editUserPassword: 'Editar senha',
     editProfile: 'Editar perfil',

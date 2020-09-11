@@ -2,12 +2,12 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import useApi from '../../../hooks/useApi';
-import useService from '../../../hooks/useService';
-import { all, remove } from '../../../models/task';
-import Task from '../../../components/Task';
-import Input from '../../../components/Input';
-import { index } from '../../../models/user';
+import useApi from '../../../../hooks/useApi';
+import useService from '../../../../hooks/useService';
+import { all, remove } from '../../../../models/task';
+import Task from '../../../../components/Task';
+import Input from '../../../../components/Input';
+import { index } from '../../../../models/user';
 
 import './index.scss';
 
