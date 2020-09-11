@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import useApi from '../../../../hooks/useApi';
@@ -7,18 +5,14 @@ import useService from '../../../../hooks/useService';
 import { all, remove } from '../../../../models/task';
 import Task from '../../../../components/Task';
 import Input from '../../../../components/Input';
-import { index } from '../../../../models/user';
+import UserSearchInput from '../../../../components/UserSearchInput';
 
 import './index.scss';
 
 const TasksPage = () => {
   const dateFilters = { FINISHED_AT: 'FINISHED_AT', STARTS_AT: 'STARTS_AT' };
   const taskAPI = useApi('task');
-  const userAPI = useApi('user');
-  const [userFilter, setUserFilter] = useState('');
-  const [users, setUsers] = useState([]);
   const [userId, setUserId] = useState(null);
-  const [showUserAutoComplete, setShowUserAutoComplete] = useState(false);
   const [tasks, setTasks] = useState([]);
   const [pages, setPages] = useState(0);
   const [page, setPage] = useState(0);
@@ -57,13 +51,8 @@ const TasksPage = () => {
     }
   };
 
-  const handleToggleAutoComplete = () => setTimeout(() => {
-    setShowUserAutoComplete(!showUserAutoComplete);
-  }, 100);
-
   const handleSelectUser = (user) => {
     setUserId(user.id);
-    setUserFilter(user.name);
     setReplaceTasks(true);
   };
 
@@ -108,17 +97,6 @@ const TasksPage = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [page, pages]);
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      index(userFilter, 0, {
-        onSuccess: (usersApi) => setUsers(usersApi),
-        onError: customAlerts.error,
-      }, userAPI);
-    };
-
-    fetchUsers();
-  }, [userFilter, customAlerts, userAPI]);
-
   return (
     <div className="TasksPage Flex Flex--vertical-alignment Flex--justify-center Flex--align-center">
       <p className="TasksPage__title">{t('links:tasks')}</p>
@@ -144,16 +122,7 @@ const TasksPage = () => {
         <div className="TasksPage__input Flex">
           <div className="TasksPage__input-label">{t('filters:responsible')}</div>
           <div className="TasksPage__input-text TasksPage__input-text--user">
-            <Input type="text" onFocus={handleToggleAutoComplete} onBlur={handleToggleAutoComplete} placeholder={t('common:search')} value={userFilter} onChange={setUserFilter} />
-            {showUserAutoComplete && (
-              <div className="TasksPage__autocomplete Flex Flex--justify-start Flex--align-center Flex--vertical-alignment">
-                {users.map((user) => (
-                  <div onClick={() => handleSelectUser(user)} className="TasksPage__autocomplete-option" key={user.email}>
-                    {user.name}
-                  </div>
-                ))}
-              </div>
-            )}
+            <UserSearchInput onSelect={handleSelectUser} />
           </div>
         </div>
       </div>

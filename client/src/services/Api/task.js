@@ -33,3 +33,20 @@ export const remove = async (userId, taskId) => {
     };
   }
 };
+
+export const register = async (userId, task) => {
+  try {
+    RootAPI.setToken();
+
+    const { data } = await RootAPI.post(`/user/${userId}/task`, task);
+
+    return data;
+  } catch (error) {
+    const errors = error?.response?.data?.errors ?? [];
+
+    return {
+      ok: false,
+      errors,
+    };
+  }
+};

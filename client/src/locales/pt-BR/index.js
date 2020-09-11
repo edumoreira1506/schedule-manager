@@ -35,10 +35,11 @@ export default {
     confirmPassword: 'Confirmação de senha.',
   },
   task: {
-    responsible: 'Usuário responsável: {{name}}',
+    responsible: 'Usuário responsável {{name}}',
     createdAt: 'Criado em {{date}}',
     finishedAt: 'Finalizado em {{date}}',
     startedAt: 'Iniciado em {{date}}',
+    description: 'Descrição',
   },
   users: {
     other: 'Usuários',

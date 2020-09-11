@@ -1,10 +1,13 @@
 import TaskMapper from './mappers/TaskMapper.js';
 import { show as showUser, authenticateAsAdmin } from './User.js';
 import UserMapper from './mappers/UserMapper.js';
+import moment from 'moment';
 
-export const taskTemplate = (task, user) => ({
+export const taskTemplate = ({ startedAt, finishedAt, ...task }, user) => ({
   ...task,
-  responsible: user.id
+  responsible: user.id,
+  startedAt: moment(startedAt).isValid() ? moment(startedAt).format() : null,
+  finishedAt: moment(finishedAt).isValid() ? moment(finishedAt).format() : null,
 });
 
 export const store = async (task, userId, token, callback, dependencies) => await showUser(token, userId, {

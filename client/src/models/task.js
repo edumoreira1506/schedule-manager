@@ -4,6 +4,12 @@ export const remove = async (userId, taskId, callback, taskService) => {
   return apiReponse.ok ? callback.onSuccess() : callback.onError(apiReponse.errors.join(' '));
 };
 
+export const register = async (userId, task, callback, taskService) => {
+  const apiReponse = await taskService.register(userId, task);
+
+  return apiReponse.ok ? callback.onSuccess() : callback.onError(apiReponse.errors.join(' '));
+};
+
 export const all = async (filters = {}, callback, taskService) => {
   const mappedFilters = {
     ...(filters.page ? { page: filters.page } : {}),
